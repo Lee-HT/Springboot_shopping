@@ -1,0 +1,21 @@
+server:
+  port: 6040
+  servlet:
+    context-path: /
+    encoding:
+      enabled: true
+      charset: UTF-8
+      force: true
+  mvc:
+    pathmatch:
+      matching-startegy: ant_path_matcher
+
+spring:
+  profiles:
+    include:
+      - oauth
+  datasource:
+    url: jdbc:mysql://localhost:5281/shopdb?characterEncoding=utf8&ServerTimezone=UTC
+#    username: shopSQL
+#    password: shopdbdb24
+    driver-class-name: com.mysql.cj.jdbc.Driver
