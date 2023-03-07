@@ -5,17 +5,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("lView")
+@RequestMapping("login/")
 public class LoginViewController {
 
     @GetMapping("login")
     public String loginMenu(){
-        return null;
+        return "login";
     }
 
-    @GetMapping("Register")
+    @GetMapping("register")
     public String RegisterMenu(){
-        return null;
+        return "register";
     }
 
 }
