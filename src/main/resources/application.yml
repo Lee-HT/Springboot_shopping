@@ -1,6 +1,7 @@
 server:
   port: 6040
   servlet:
+    # default
     context-path: /
     encoding:
       enabled: true
@@ -16,6 +17,17 @@ spring:
       - oauth
   datasource:
     url: jdbc:mysql://localhost:5281/shopdb?characterEncoding=utf8&ServerTimezone=UTC
-#    username: shopSQL
-#    password: shopdbdb24
+#    username: shop
+#    password: shopdbdb24.
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+  security:
+    user:
+      name: user
+      password: password
+
+mybatis:
+  configuration:
+
+  mapper-locations: mapper/*.xml
+  type-aliases-package: com.shop.market.mapper
