@@ -3,10 +3,10 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.shop.market.data.repository.UserRepository">
-  <insert id="saveUser" parameterType="com.shop.market.UserD">
-    insert into User(username, password, email)
-    values(#{username}, #{password}, #{email})
-
+<mapper namespace="com.shop.market.repository.UserRepository">
+  <!-- yml alias 설정 -->
+  <insert id="saveUser" parameterType="dto.UserD">
+    insert into user_table(username, password, email, role)
+    values(#{username}, #{password}, #{email}, ROLE_USER)
   </insert>
 </mapper>

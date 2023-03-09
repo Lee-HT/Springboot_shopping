@@ -1,6 +1,7 @@
 package com.shop.market.config;
 
 import javax.sql.DataSource;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.context.annotation.Bean;
@@ -16,7 +17,7 @@ public class MybatisConfig {
         sessionFactory.setDataSource(dataSource);
 
         Resource[] resources = new PathMatchingResourcePatternResolver()
-                .getResources("classpath:mybatis/mapper/*.xml");
+                .getResources("classpath:mapper/*.xml");
 
         sessionFactory.setMapperLocations(resources);
 

@@ -1,11 +1,15 @@
-package com.shop.market.data.dto;
+package com.shop.market.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Builder
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UserD {
 
     @NotBlank

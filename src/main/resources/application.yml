@@ -30,4 +30,4 @@ mybatis:
   configuration:
 
   mapper-locations: mapper/*.xml
-  type-aliases-package: com.shop.market.mapper
+  type-aliases-package: com.shop.market

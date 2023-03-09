@@ -1,18 +1,18 @@
-package com.shop.market.data.entity;
+package com.shop.market.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
-public class UserE extends BaseTimeE{
-    private Long id;
+public class LoginD {
 
     private String username;
 
     private String password;
 
-    private String email;
 }

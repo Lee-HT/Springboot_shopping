@@ -1,4 +1,4 @@
-package com.shop.market.data.entity;
+package com.shop.market.entity;
 
 import java.time.LocalDateTime;
 
