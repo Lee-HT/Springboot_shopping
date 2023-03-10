@@ -7,8 +7,4 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserRepository {
     void saveUser(UserD userD);
 
-    void findUserByUsername(String username);
-
-    void updateUserByUsername(String username, String password);
-
 }
