@@ -22,9 +22,11 @@ public class UserSaveTest {
     @Transactional
     @Rollback
     public void userSaveTest(){
-        log.info("save user 실행");
         userRepository.saveUser(UserD.builder()
                 .username("username").password("password").email("email@email").build());
+
+        userRepository.findUserByUsername("username_test");
+        log.info("save user 실행");
     }
 
 

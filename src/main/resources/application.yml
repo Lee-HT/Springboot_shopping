@@ -9,7 +9,7 @@ server:
       force: true
   mvc:
     pathmatch:
-      matching-startegy: ant_path_matcher
+      matching-strategy: ant_path_matcher
 
 spring:
   profiles:

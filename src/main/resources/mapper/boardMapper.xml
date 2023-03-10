@@ -9,4 +9,12 @@
     insert into user_table(username, password, email, role)
     values(#{username}, #{password}, #{email}, ROLE_USER)
   </insert>
+
+  <select id="findUserByUsername" parameterType="String">
+    select password from user_table where username = #{username}
+  </select>
+
+  <update id="updateUserByUsername" parameterType="String">
+    update user_table Set password = #{password} where username = #{username}
+  </update>
 </mapper>
