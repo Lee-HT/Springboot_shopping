@@ -1,8 +1,10 @@
 package com.shop.market.service;
 
+import com.shop.market.dto.userD;
+
 public interface UserService {
 
-//    public void login();
-//    public void register();
+//    void login();
+    void register(userD userD);
 
 }

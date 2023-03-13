@@ -2,7 +2,7 @@ package com.shop.market.entity;
 
 import java.time.LocalDateTime;
 
-public class BaseTimeE {
+public class baseTimeE {
 
     private LocalDateTime createAt;
 

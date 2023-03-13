@@ -9,7 +9,7 @@ server:
       force: true
   mvc:
     pathmatch:
-      matching-startegy: ant_path_matcher
+      matching-strategy: ant_path_matcher
 
 spring:
   profiles:
@@ -27,7 +27,6 @@ spring:
       password: password
 
 mybatis:
-  configuration:
-
-  mapper-locations: mapper/*.xml
-  type-aliases-package: com.shop.market
+#  config: mapper/mybatis-config.xml
+  mapper-locations: mapper/**/*.xml
+  type-aliases-package: com.shop.market.entity
