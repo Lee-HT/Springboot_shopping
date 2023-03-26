@@ -19,7 +19,7 @@ public class userE extends baseTimeE {
 
     private String role;
 
-    private LocalDateTime createdate;
+    private LocalDateTime createDate;
 
-    private LocalDateTime updatedate;
+    private LocalDateTime updateDate;
 }
