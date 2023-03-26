@@ -17,16 +17,21 @@ public class LoginController {
     private UserService userService;
 
     @Autowired
-    public LoginController(UserService userService){
+    public LoginController(UserService userService) {
         this.userService = userService;
     }
 
 
     @PostMapping("login")
-    public String login() { return "Redirect:6040/login/login"; }
+    public String login() {
+        log.info("Controller login");
+        return "redirect:/login/login";
+    }
 
     @PostMapping("register")
-    public String Register(@Valid userD userD){
-        return "Redirect:6040/login/login";
+    public String Register(@Valid userD userD) {
+        log.info("Controller register");
+        userService.register(userD);
+        return "redirect:/login/login";
     }
 }
