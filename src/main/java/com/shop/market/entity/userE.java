@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class userE extends baseTimeE {
+public class userE {
     private Long id;
 
     private String username;

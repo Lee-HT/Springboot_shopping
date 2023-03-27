@@ -28,8 +28,8 @@ spring:
 
 mybatis:
   config-location: classpath:mapper/mybatis-config.xml
-  mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: com.shop.market.entity
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.shop.market.dto
 #  type-handlers-package: com.example.typehandler
   configuration:
     map-underscore-to-camel-case: true

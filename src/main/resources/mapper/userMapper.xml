@@ -1,22 +1,21 @@
 <?xml version="1.0" encoding = "UTF-8?"?>
 
-<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
-<!--  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
-  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shop.market.mapper.UserMapper">
-<!--   yml alias 설정 -->
-  <insert id="saveUser" parameterType="userE">
+  <!--   yml alias 설정 -->
+  <insert id="saveUser" parameterType="userD">
     insert into user_table(username, password, email, role)
     values(#{username}, #{password}, #{email}, ROLE_USER)
   </insert>
 
-  <select id="findByUsername" parameterType="String">
-    select * from user_table where username = #{username}
+  <select id="findByUsername" parameterType="string" resultType="loginD">
+    select username,password,email from user_table where username = #{username}
   </select>
 
-  <update id="updateByUsername" parameterType="String">
+  <update id="updateByUsername" parameterType="string">
     update user_table set password = #{password} where username = #{username}
   </update>
 </mapper>
