@@ -2,7 +2,7 @@ package com.shop.market.service.Impl;
 
 import com.shop.market.dto.loginD;
 import com.shop.market.dto.userD;
-import com.shop.market.mapper.UserMapper;
+import com.shop.market.repository.UserMapper;
 import com.shop.market.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

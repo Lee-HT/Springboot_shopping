@@ -1,7 +1,7 @@
 package com.shop.market.mybatisTest;
 
 import com.shop.market.dto.userD;
-import com.shop.market.mapper.UserMapper;
+import com.shop.market.repository.UserMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

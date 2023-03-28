@@ -1,10 +1,8 @@
-package com.shop.market.mapper;
+package com.shop.market.repository;
 
 import com.shop.market.dto.userD;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
-@Repository
 @Mapper
 public interface UserMapper {
     void saveUser(userD userD);
