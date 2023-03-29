@@ -6,12 +6,12 @@
 
 <mapper namespace="com.shop.market.repository.UserMapper">
   <!--   yml alias 설정 -->
-  <insert id="saveUser" parameterType="userD">
+  <insert id="saveUser" parameterType="com.shop.market.dto.userD">
     insert into user_table(username, password, email, role)
     values(#{username}, #{password}, #{email}, ROLE_USER)
   </insert>
 
-  <select id="findByUsername" parameterType="string" resultType="loginD">
+  <select id="findByUsername" parameterType="string" resultType="com.shop.market.dto.loginD">
     select username,password,email from user_table where username = #{username}
   </select>
 
