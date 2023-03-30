@@ -13,7 +13,7 @@ public class WebConfiguration implements WebMvcConfigurer {
 
         resolver.setCharset("UTF-8");
         resolver.setContentType("text/html;charset=UTF-8");
-        resolver.setPrefix("classpath:/static/");
+        resolver.setPrefix("classpath:/template/");
         resolver.setSuffix(".mustache");
 
         registry.viewResolver(resolver);
