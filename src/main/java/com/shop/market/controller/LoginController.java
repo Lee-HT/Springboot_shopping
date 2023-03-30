@@ -4,12 +4,16 @@ import com.shop.market.dto.loginD;
 import com.shop.market.dto.userD;
 import com.shop.market.service.UserService;
 import jakarta.validation.Valid;
+import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @Controller
@@ -26,7 +30,9 @@ public class LoginController {
     @PostMapping("findUser")
     public String findUser(@RequestBody loginD login){
         log.info("Controller findUser");
-        userService.findUser(login);
+        userD user = userService.findUser(login);
+        log.info(user.getUsername());
+        log.info(user.getPassword());
         return "redirect:/login/login";
     }
 
@@ -41,5 +47,21 @@ public class LoginController {
         log.info("Controller register");
         userService.register(user);
         return "redirect:/login/login";
+    }
+
+    @PostMapping("unregister")
+    public String unRegister(@RequestBody @Valid loginD login){
+        log.info("Controller unregister");
+        userService.unregister(login.getUsername());
+        return "redirect:/login/login";
+    }
+
+    @PostMapping("users")
+    @ResponseBody
+    public ResponseEntity<List<userD>> userList(){
+        log.info("Controller find user All");
+        List<userD> userList = userService.findUserAll();
+
+        return ResponseEntity.status(HttpStatus.OK).body(userList);
     }
 }
