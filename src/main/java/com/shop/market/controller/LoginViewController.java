@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginViewController {
 
     @GetMapping("login")
-    public String loginMenu(Model model) {
-        model.addAttribute("username", "user1");
+    public String loginMenu() {
         return "login";
     }
 
