@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("post/")
@@ -16,12 +17,12 @@ public class PostViewController {
 
     @GetMapping("savePost")
     public String savePost() {
-        return "savePost";
+        return "post/savePost";
     }
 
     @GetMapping("sellerPost")
-    public String sellerPost(Model model, String seller) {
+    public String sellerPost(Model model, @RequestParam String seller) {
         model.addAttribute("postList",postService.sellerPost(seller));
-        return "sellerPost";
+        return "post/sellerPost";
     }
 }

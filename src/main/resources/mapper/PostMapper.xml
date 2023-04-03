@@ -15,4 +15,10 @@
     SELECT * FROM post_table
     WHERE seller = #{seller}
   </select>
+
+  <delete id="deletePostById"
+  parameterType="Long">
+    DELETE FROM post_table
+    WHERE id = = #{id}
+  </delete>
 </mapper>

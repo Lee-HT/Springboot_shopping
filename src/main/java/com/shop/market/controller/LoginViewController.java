@@ -16,12 +16,12 @@ public class LoginViewController {
 
     @GetMapping("register")
     public String registerMenu() {
-        return "register";
+        return "user/register";
     }
 
     @GetMapping("savePost")
     public String savePostMenu() {
-        return "savePost";
+        return "user/savePost";
     }
 
 }
