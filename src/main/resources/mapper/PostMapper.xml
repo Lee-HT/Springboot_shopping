@@ -3,15 +3,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shop.market.repository.PostMapper">
-  <insert id="insertPostByUsername"
+  <insert id="insertPostBySeller"
     parameterType="postD">
-    INSERT INTO post_table(author,title,content)
-    VALUES(#{author},#{title},#{content})
+    INSERT INTO post_table(seller,title,content)
+    VALUES(#{seller},#{title},#{content})
   </insert>
 
-  <select id="selectPostByUsername"
-  parameterType="String">
-    SELECT * FROM post_table(author,title,content)
-    WHERE author = #{author}
+  <select id="selectPostBySeller"
+  parameterType="String"
+  resultType="postD">
+    SELECT * FROM post_table
+    WHERE seller = #{seller}
   </select>
 </mapper>

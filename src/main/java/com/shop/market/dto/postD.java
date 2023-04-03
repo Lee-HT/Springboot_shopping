@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class postD {
-    private String author;
+    private String seller;
 
     private String title;
 

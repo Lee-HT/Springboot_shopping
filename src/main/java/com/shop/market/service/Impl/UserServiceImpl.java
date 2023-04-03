@@ -24,20 +24,24 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @Override
     public List<userD> findUserAll(){
         return userMapper.selectUserAll();
     }
 
+    @Override
     public void register(userD user){
         log.info("UserService register");
         userMapper.saveUser(user);
     }
 
+    @Override
     public void unregister(String username){
         log.info("UserService unregister");
         userMapper.deleteUser(username);
     }
 
+    @Override
     public userD findUser(loginD login){
         log.info("UserService findUser");
         userD user = userMapper.findUserByUsername(login.getUsername());

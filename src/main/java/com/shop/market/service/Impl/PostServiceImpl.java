@@ -14,11 +14,22 @@ public class PostServiceImpl implements PostService {
     @Autowired
     private PostMapper postMapper;
 
+    @Override
     public void savePost(postD post){
         try{
-            postMapper.insertPostByUsername(post);
+            postMapper.insertPostBySeller(post);
         }catch(Exception e){
             log.info("savePost error: " + e);
         }
     };
+
+    @Override
+    public List<postD> sellerPost(String seller){
+        try{
+            return postMapper.selectPostBySeller(seller);
+        }catch(Exception e){
+            log.info("sellerPost error " + e);
+            return null;
+        }
+    }
 }

@@ -3,6 +3,7 @@ package com.shop.market.controller;
 import com.shop.market.dto.postD;
 import com.shop.market.service.PostService;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,14 +24,21 @@ public class PostController {
     @PostMapping("savePost")
     public @ResponseBody postD savePost(@RequestParam HashMap<String, String> postMap) {
         log.info("postController savePost");
-        log.info(postMap.get("author"));
+        log.info(postMap.get("seller"));
         log.info(postMap.get("title"));
         log.info(postMap.get("content"));
-        postD post = postD.builder().author(postMap.get("author"))
+        postD post = postD.builder().seller(postMap.get("seller"))
                 .title(postMap.get("title"))
                 .content(postMap.get("content")).build();
         postService.savePost(post);
         return post;
+    }
+
+    @PostMapping("selectPost")
+    public @ResponseBody List<postD> sellerPost(@RequestParam String seller){
+        log.info("postController selectPost");
+        List<postD> postList = postService.sellerPost(seller);
+        return postList;
     }
 
 }
