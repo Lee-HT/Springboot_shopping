@@ -1,9 +1,11 @@
 package com.shop.market.controller;
 
 import com.shop.market.dto.loginD;
+import com.shop.market.dto.postD;
 import com.shop.market.dto.userD;
 import com.shop.market.service.UserService;
 import jakarta.validation.Valid;
+import java.util.HashMap;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
@@ -43,9 +46,12 @@ public class LoginController {
     }
 
     @PostMapping("register")
-    public String Register(@RequestBody @Valid userD user) {
+    public String Register(@RequestParam @Valid HashMap<String,String> user) {
         log.info("Controller register");
-        userService.register(user);
+        userD user_ = userD.builder()
+                .username(user.get("username")).password(user.get("password")).email(user.get("email"))
+                .build();
+        userService.register(user_);
         return "redirect:/login/login";
     }
 
