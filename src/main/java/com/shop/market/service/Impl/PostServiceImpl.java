@@ -26,6 +26,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<postD> sellerPost(String seller){
         try{
+            log.info("sellerPostService");
             return postMapper.selectPostBySeller(seller);
         }catch(Exception e){
             log.info("sellerPost error " + e);

@@ -34,10 +34,13 @@ public class PostController {
         return post;
     }
 
-    @PostMapping("selectPost")
+    @PostMapping("sellerPost")
     public @ResponseBody List<postD> sellerPost(@RequestParam String seller){
         log.info("postController selectPost");
         List<postD> postList = postService.sellerPost(seller);
+        log.info(postList.get(0).getSeller());
+        log.info(postList.get(0).getTitle());
+        log.info(postList.get(0).getContent());
         return postList;
     }
 
