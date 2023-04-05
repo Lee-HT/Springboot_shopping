@@ -11,7 +11,7 @@ public class LoginViewController {
 
     @GetMapping("login")
     public String loginMenu() {
-        return "login";
+        return "user/login";
     }
 
     @GetMapping("register")

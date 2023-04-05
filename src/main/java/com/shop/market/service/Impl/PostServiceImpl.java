@@ -33,4 +33,17 @@ public class PostServiceImpl implements PostService {
             return null;
         }
     }
+
+    @Override
+    public postD deletePost(Long id){
+        try{
+            log.info("deletePostService");
+            postD deleted = postMapper.selectPostById(id);
+            postMapper.deletePostById(id);
+            return deleted;
+        }catch(Exception e){
+            log.info("deletePost error");
+            return null;
+        }
+    }
 }

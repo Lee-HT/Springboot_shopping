@@ -46,12 +46,12 @@ public class LoginController {
     }
 
     @PostMapping("register")
-    public String Register(@RequestParam @Valid HashMap<String,String> user) {
+    public String Register(userD user) {
         log.info("Controller register");
-        userD user_ = userD.builder()
-                .username(user.get("username")).password(user.get("password")).email(user.get("email"))
-                .build();
-        userService.register(user_);
+        log.info(user.getUsername());
+        log.info(user.getPassword());
+        log.info(user.getEmail());
+        userService.register(user);
         return "redirect:/login/login";
     }
 

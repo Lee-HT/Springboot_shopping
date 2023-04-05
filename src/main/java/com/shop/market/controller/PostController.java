@@ -2,11 +2,13 @@ package com.shop.market.controller;
 
 import com.shop.market.dto.postD;
 import com.shop.market.service.PostService;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,16 +24,12 @@ public class PostController {
     private PostService postService;
 
     @PostMapping("savePost")
-    public @ResponseBody postD savePost(@RequestBody HashMap<String,String> postMap) {
+    public @ResponseBody postD savePost(postD post) {
         log.info("postController savePost");
-        log.info(postMap.get("seller"));
-        log.info(postMap.get("title"));
-        log.info(postMap.get("content"));
+        log.info(post.getSeller());
+        log.info(post.getTitle());
+        log.info(post.getContent());
         try{
-            postD post = postD.builder().seller(postMap.get("seller"))
-                    .title(postMap.get("title"))
-                    .content(postMap.get("content")).build();
-
             postService.savePost(post);
             return post;
         }catch (Exception e){
@@ -50,6 +48,12 @@ public class PostController {
         log.info(postList.get(0).getTitle());
         log.info(postList.get(0).getContent());
         return postList;
+    }
+
+    @DeleteMapping("deletePost")
+    public @ResponseBody postD deletePost(Long id){
+        log.info("postController deletePost");
+        return postService.deletePost(id);
     }
 
 }

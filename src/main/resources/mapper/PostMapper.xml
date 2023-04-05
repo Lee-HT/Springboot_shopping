@@ -21,4 +21,11 @@
     DELETE FROM post_table
     WHERE id = = #{id}
   </delete>
+
+  <select id="selectPostById"
+  parameterType="Long"
+  resultType="postD">
+    SELECT * FROM post_table
+    WHERE id = #{id}
+  </select>
 </mapper>
