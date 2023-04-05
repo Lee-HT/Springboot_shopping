@@ -39,10 +39,14 @@ public class PostServiceImpl implements PostService {
         try{
             log.info("deletePostService");
             postD deleted = postMapper.selectPostById(id);
-            postMapper.deletePostById(id);
+            if (deleted == null){
+                log.info("this id is null");
+            }else{
+                postMapper.deletePostById(id);
+            }
             return deleted;
         }catch(Exception e){
-            log.info("deletePost error");
+            log.info("deletePostService error" + e);
             return null;
         }
     }

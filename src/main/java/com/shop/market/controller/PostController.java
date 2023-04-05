@@ -51,9 +51,9 @@ public class PostController {
     }
 
     @DeleteMapping("deletePost")
-    public @ResponseBody postD deletePost(Long id){
+    public @ResponseBody postD deletePost(@RequestBody HashMap<String,Long> id){
         log.info("postController deletePost");
-        return postService.deletePost(id);
+        return postService.deletePost(id.get("id"));
     }
 
 }

@@ -1,0 +1,27 @@
+.header {
+height:120px; background-color:#30FF93; border: 1px solid #253342;
+position:fixed; width: 90%; z-index:9999; top:0; left:5%; right:5%;
+}
+
+body {
+background-color:#F0F0F0;
+}
+
+.container{
+padding-top:120px;
+}
+
+.ht {
+color:blue; line-height:50px; float:left;
+}
+
+.menu {
+color:blue; px:50px; float:right;
+}
+
+.menu li{
+float:left; margin-right:30px;}
+
+.hul{
+list-style:none;
+}

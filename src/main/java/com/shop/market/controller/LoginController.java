@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,8 +56,8 @@ public class LoginController {
         return "redirect:/login/login";
     }
 
-    @PostMapping("unregister")
-    public String unRegister(@RequestBody @Valid loginD login){
+    @DeleteMapping("unregister")
+    public String unRegister(@RequestBody loginD login){
         log.info("Controller unregister");
         userService.unregister(login.getUsername());
         return "redirect:/login/login";
