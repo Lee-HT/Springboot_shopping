@@ -36,8 +36,6 @@ public class PostController {
             log.info("savePost error");
             return null;
         }
-
-
     }
 
     @PostMapping("sellerPost")
