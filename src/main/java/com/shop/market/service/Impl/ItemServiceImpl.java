@@ -16,7 +16,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<itemD> searchItem(String itemName){
         log.info("itemService SearchItem");
-        return itemMapper.searchItemByItemName(itemName);
+        return itemMapper.searchItemByItemName(itemName + "%");
     }
     @Override
     public void deleteItem(Long id){

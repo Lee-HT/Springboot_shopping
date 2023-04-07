@@ -4,14 +4,14 @@
 
 <mapper namespace="com.shop.market.repository.ItemMapper">
   <select id="searchItemByItemName"
-  parameterType="String"
-  resultType="itemD">
+    parameterType="String"
+    resultType="itemD">
     SELECT * FROM item_table
     WHERE item_name LIKE #{itemName}
   </select>
 
   <delete id="deleteItemById"
-  parameterType="Long">
+    parameterType="Long">
     DELETE FROM item_table
     WHERE id = #{id}
   </delete>
