@@ -6,5 +6,7 @@ import java.util.List;
 public interface ItemService {
     List<itemD> searchItem(String itemName);
 
+    void insertItem(itemD item);
+
     void deleteItem(Long id);
 }

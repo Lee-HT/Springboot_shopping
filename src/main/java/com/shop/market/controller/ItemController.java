@@ -2,7 +2,6 @@ package com.shop.market.controller;
 
 import com.shop.market.dto.itemD;
 import com.shop.market.service.ItemService;
-import com.shop.market.service.PostService;
 import java.util.HashMap;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -14,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Slf4j
 @Controller
-@RequestMapping("item/")
+@RequestMapping("itemProcess/")
 public class ItemController {
     private ItemService itemService;
 
@@ -30,9 +28,19 @@ public class ItemController {
     @GetMapping("searchItem")
     @ResponseBody
     public List<itemD> searchItem(@RequestParam String itemName){
-        log.info("itemController");
+        log.info("itemController searchItem");
         log.info(itemName);
         return itemService.searchItem(itemName);
+    }
+
+    @GetMapping("newItem")
+    @ResponseBody
+    public itemD insertItem(@RequestBody itemD item){
+        log.info("itemController insertItem");
+        log.info(item.getItemName());
+        log.info(item.getSeller());
+        itemService.insertItem(item);
+        return item;
     }
 
     @DeleteMapping("deleteItem")

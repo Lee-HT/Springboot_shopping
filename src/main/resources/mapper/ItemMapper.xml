@@ -10,6 +10,12 @@
     WHERE item_name LIKE #{itemName}
   </select>
 
+  <insert id="insertItem"
+  parameterType="itemD">
+    INSERT FROM item_table(seller, item_name, item_price, sell_count, item_stock)
+    VALUES(#{seller}, #{itemName}, #{itemPrice}, #{sellCount}, #{itemStock})
+  </insert>
+
   <delete id="deleteItemById"
     parameterType="Long">
     DELETE FROM item_table

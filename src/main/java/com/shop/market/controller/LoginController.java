@@ -1,11 +1,8 @@
 package com.shop.market.controller;
 
 import com.shop.market.dto.loginD;
-import com.shop.market.dto.postD;
 import com.shop.market.dto.userD;
 import com.shop.market.service.UserService;
-import jakarta.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

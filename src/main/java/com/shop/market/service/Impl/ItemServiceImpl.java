@@ -18,6 +18,13 @@ public class ItemServiceImpl implements ItemService {
         log.info("itemService SearchItem");
         return itemMapper.searchItemByItemName(itemName + "%");
     }
+
+    @Override
+    public void insertItem(itemD item){
+        log.info("itemService insertItem");
+        itemMapper.insertItem(item);
+    }
+
     @Override
     public void deleteItem(Long id){
         log.info("itemService deleteItem");
