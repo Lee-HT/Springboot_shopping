@@ -31,6 +31,6 @@ public class ItemViewController {
 
         model.addAttribute("searchText",searchText);
         model.addAttribute("searchList",searchList);
-        return "searchItem";
+        return "item/searchItem";
     }
 }
