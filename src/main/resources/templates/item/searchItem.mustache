@@ -1,3 +1,38 @@
 {{>layout/header}}
-
+<h1>상품 검색</h1>
+<div class="col-md-12">
+  <div class="col-md-8">
+    <form class="container" action="item/search" method="get">
+      <div class="form-group">
+        <label>검색</label>
+        <input type="text" class="form-control" name="searchText" placeholder="search keyword">
+      </div>
+    </form>
+    <br>
+    <div class="form-group">
+      <table class="table table-horizontal table-boarded">
+        <thead>
+        <tr>
+          <th>이름</th>
+          <th>판매자</th>
+          <th>가격</th>
+          <th>판매량</th>
+          <th>재고</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#searchList}}
+          <tr>
+            <td>{{itemName}}</td>
+            <td>{{seller}}</td>
+            <td>{{itemPrice}}</td>
+            <td>{{sell_count}}</td>
+            <td>{{itemStock}}</td>
+          </tr>
+        {{/searchList}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 {{>layout/footer}}
