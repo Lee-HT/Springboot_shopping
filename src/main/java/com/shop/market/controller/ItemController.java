@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,7 +33,7 @@ public class ItemController {
     public List<itemD> searchItem(@RequestParam String itemName){
         log.info("itemController searchItem");
         log.info(itemName);
-        return itemService.searchItem(itemName);
+        return itemService.searchByItemName(itemName);
     }
 
     @GetMapping("newItem")
@@ -49,6 +52,14 @@ public class ItemController {
         Long id = deleteMap.get("id");
         itemService.deleteItem(id);
         return "redirect:/";
+    }
+
+    @PatchMapping("updateItem")
+    @ResponseBody
+    public itemD updateItem(@RequestBody itemD item){
+        log.info("itemController updateItem");
+        log.info(item.getItemName());
+        return itemService.updateItem(item);
     }
 
 }

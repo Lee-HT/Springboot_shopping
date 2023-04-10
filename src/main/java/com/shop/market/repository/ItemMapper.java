@@ -6,7 +6,10 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface ItemMapper {
-    List<itemD> searchItemByItemName(String itemName);
+    List<itemD> searchItemsByItemName(String itemName);
+    itemD searchItemByItemName(String itemName);
+    itemD searchItemById(Long id);
+    void updateItem(itemD item);
     void insertItem(itemD item);
     void deleteItemById(Long id);
 

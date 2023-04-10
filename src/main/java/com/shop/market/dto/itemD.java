@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class itemD {
 
+    private Long id;
     private String seller;
     private String itemName;
     private int itemPrice;

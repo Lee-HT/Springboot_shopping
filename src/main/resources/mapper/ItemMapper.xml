@@ -3,16 +3,30 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.shop.market.repository.ItemMapper">
-  <select id="searchItemByItemName"
+  <select id="searchItemsByItemName"
     parameterType="String"
     resultType="itemD">
     SELECT * FROM item_table
     WHERE item_name LIKE #{itemName}
   </select>
 
+  <select id="searchItemByItemName"
+    parameterType="String"
+    resultType="itemD">
+    SELECT * FROM item_table
+    WHERE item_name = #{itemName}
+  </select>
+
+  <select id="searchItemById"
+  parameterType="Long"
+  resultType="itemD">
+    SELECT * FROM item_table
+    WHERE id = #{id}
+  </select>
+
   <insert id="insertItem"
   parameterType="itemD">
-    INSERT FROM item_table(seller, item_name, item_price, sell_count, item_stock)
+    INSERT INTO item_table(seller, item_name, item_price, sell_count, item_stock)
     VALUES(#{seller}, #{itemName}, #{itemPrice}, #{sellCount}, #{itemStock})
   </insert>
 
@@ -21,4 +35,14 @@
     DELETE FROM item_table
     WHERE id = #{id}
   </delete>
+
+  <update id="updateItem"
+    parameterType="itemD">
+    UPDATE item_table
+    SET id=#{id}, seller=#{seller},
+    item_name=#{itemName}, item_price=#{itemPrice},
+    sell_count=#{sellCount}, item_stock=#{itemStock}
+    WHERE id=#{id}
+  </update>
+
 </mapper>
