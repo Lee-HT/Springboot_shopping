@@ -4,13 +4,14 @@ import com.shop.market.dto.itemD;
 import com.shop.market.service.ItemService;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,9 +57,9 @@ public class ItemController {
 
     @PatchMapping("updateItem")
     @ResponseBody
-    public itemD updateItem(@RequestBody itemD item){
+    public itemD updateItem(@RequestParam Map<String,Object> item){
         log.info("itemController updateItem");
-        log.info(item.getItemName());
+        log.info(item.get("itemName").toString());
         return itemService.updateItem(item);
     }
 
