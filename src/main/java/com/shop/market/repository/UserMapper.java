@@ -12,13 +12,13 @@ public interface UserMapper {
 
     List<userD> selectUserAll();
 
+    userD findByEmailAndProvider(Long id);
+
     userD findUserByUsername(String username);
 
     void saveUser(userD userD);
 
-//    @Delete("DELETE * from user_table where username = #{username}")
     void deleteUser(String username);
 
-    void updateUserByUsername(String username, String password);
 
 }

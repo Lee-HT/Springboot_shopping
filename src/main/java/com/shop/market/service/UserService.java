@@ -9,7 +9,8 @@ public interface UserService {
 
     List<userD> findUserAll();
 
-//    void login();
+    userD findUser(Long id);
+
     void register(userD user);
 
     void unregister(String username);

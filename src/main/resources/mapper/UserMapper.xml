@@ -8,6 +8,13 @@
     SELECT * FROM user_table
   </select>
 
+  <select id="findByEmailAndProvider"
+  parameterType="String"
+  resultType="userD">
+    SELECT * FROM user_table
+    WHERE email = #{email}, provider = #{provider}
+  </select>
+
   <select id="findUserByUsername"
     parameterType="String"
     resultType="userD">
@@ -26,4 +33,6 @@
     DELETE FROM user_table
     where username = #{username}
   </delete>
+
+  <update id="updateByUser"
 </mapper>

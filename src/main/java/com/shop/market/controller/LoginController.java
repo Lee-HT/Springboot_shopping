@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
@@ -27,13 +28,21 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @PostMapping("findUser")
-    public String findUser(@RequestBody loginD login){
-        log.info("Controller findUser");
+    @PostMapping("findUserAll")
+    public String findUserAll(@RequestBody loginD login){
+        log.info("Controller findUserAll");
         userD user = userService.findUser(login);
         log.info(user.getUsername());
         log.info(user.getPassword());
         return "redirect:/login/login";
+    }
+
+    @PostMapping("findUser")
+    public userD findUser(@RequestBody Long id){
+        log.info("Controller findUser");
+        userD user = userService.findUser(id);
+        return user;
+
     }
 
     @PostMapping("login")

@@ -30,6 +30,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public userD findUser(Long id) {
+        userD user = userMapper.findByEmailAndProvider(id);
+        if (user != null){
+            return user;
+        }else{
+            return null;
+        }
+    }
+
+    @Override
     public void register(userD user){
         log.info("UserService register");
         userMapper.saveUser(user);
