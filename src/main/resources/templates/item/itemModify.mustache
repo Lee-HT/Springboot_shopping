@@ -1,26 +1,3 @@
 {{>layout/header}}
-<h1>수정</h1>
-<div class="col-md-12">
-  <div class="col-md-8">
-    <form action="/itemProcess/updateItem" method="post">
-      <input type="hidden" name="_method" value="patch">
-      <div class="form-group">
-        <label>이름</label>
-        <input type="text" class="form-control" name="itemName"
-               value="{{itemName}}" placeholder="itemName">
-      </div>
-      <div class="form-group">
-        <label>가격</label>
-        <input type="number" class="form-control" name="itemPrice"
-               value="{{itemPrice}}" placeholder="itemPrice">
-      </div>
-      <div class="form-group">
-        <label>재고량</label>
-        <input type="number" class="form-control" name="itemStock"
-               value="{{itemStock}}" placeholder="itemStock">
-      </div>
-      <button type="submit" class="btn btn-primary" id="btn-save"></button>
-    </form>
-  </div>
-</div>
+
 {{>layout/footer}}

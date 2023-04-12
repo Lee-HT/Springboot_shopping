@@ -2,11 +2,10 @@
 <h1>상품 검색</h1>
 <div class="col-md-12">
   <div class="col-md-8">
-    <form action="/item/search" method="get">
+    <form class="container" action="item/search" method="get">
       <div class="form-group">
         <label>검색</label>
-        <input type="text" class="form-control" name="searchText"
-               value="{{searchText}}" placeholder="search keyword">
+        <input type="text" class="form-control" name="searchText" placeholder="search keyword">
       </div>
     </form>
     <br>
@@ -27,7 +26,7 @@
             <td>{{itemName}}</td>
             <td>{{seller}}</td>
             <td>{{itemPrice}}</td>
-            <td>{{sellCount}}</td>
+            <td>{{sell_count}}</td>
             <td>{{itemStock}}</td>
           </tr>
         {{/searchList}}
