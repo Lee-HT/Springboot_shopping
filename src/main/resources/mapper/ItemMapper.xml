@@ -10,7 +10,7 @@
     WHERE item_name LIKE #{itemName}
   </select>
 
-  <select id="searchItemByItemName"
+  <select id="selectItemByItemName"
     parameterType="String"
     resultType="itemD">
     SELECT * FROM item_table

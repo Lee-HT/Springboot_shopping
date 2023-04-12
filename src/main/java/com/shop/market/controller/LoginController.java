@@ -4,6 +4,8 @@ import com.shop.market.dto.loginD;
 import com.shop.market.dto.userD;
 import com.shop.market.service.UserService;
 import java.util.List;
+import java.util.Map;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,9 +40,9 @@ public class LoginController {
     }
 
     @PostMapping("findUser")
-    public userD findUser(@RequestBody Long id){
+    public userD findUser(@RequestBody Map<String,String> emAndPv){
         log.info("Controller findUser");
-        userD user = userService.findUser(id);
+        userD user = userService.findByEmailProvider(emAndPv);
         return user;
 
     }

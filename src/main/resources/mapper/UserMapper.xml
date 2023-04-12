@@ -9,10 +9,10 @@
   </select>
 
   <select id="findByEmailAndProvider"
-  parameterType="String"
+  parameterType="Map"
   resultType="userD">
     SELECT * FROM user_table
-    WHERE email = #{email}, provider = #{provider}
+    WHERE email = #{emAndPv.email}, provider = #{emAndPv.provider}
   </select>
 
   <select id="findUserByUsername"

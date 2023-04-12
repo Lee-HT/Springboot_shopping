@@ -52,7 +52,7 @@ public class ItemServiceImpl implements ItemService {
         log.info("itemService updateItem");
         try{
             log.info(item.get("itemName").toString());
-            itemD beforeItem = itemMapper.searchItemByItemName(item.get("itemName").toString());
+            itemD beforeItem = itemMapper.selectItemByItemName(item.get("itemName").toString());
             Long id = beforeItem.getId();
             log.info(id.toString());
 

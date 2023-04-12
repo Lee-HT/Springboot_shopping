@@ -1,6 +1,5 @@
 package com.shop.market.config;
 
-import com.shop.market.config.Service.OAuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +16,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-
-    private final OAuthService oAuthService;
 
     @Bean
     public PasswordEncoder PasswordEncoder(){
@@ -40,7 +37,6 @@ public class SecurityConfig {
         http.authorizeHttpRequests((authz)-> authz
                 .requestMatchers("/").permitAll()
                 .anyRequest().permitAll());
-        http.oauth2Login().userInfoEndpoint().userService(oAuthService);
 
         return http.build();
     }

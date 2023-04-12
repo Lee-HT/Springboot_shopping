@@ -5,6 +5,8 @@ import com.shop.market.dto.userD;
 import com.shop.market.repository.UserMapper;
 import com.shop.market.service.UserService;
 import java.util.List;
+import java.util.Map;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -30,8 +32,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public userD findUser(Long id) {
-        userD user = userMapper.findByEmailAndProvider(id);
+    public userD findByEmailProvider(Map<String,String> emAndPv) {
+        userD user = userMapper.findByEmailAndProvider(emAndPv);
         if (user != null){
             return user;
         }else{
