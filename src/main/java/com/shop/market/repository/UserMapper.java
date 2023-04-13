@@ -22,5 +22,5 @@ public interface UserMapper {
 
     void deleteUser(String username);
 
-
+    void updateUser(userD user);
 }

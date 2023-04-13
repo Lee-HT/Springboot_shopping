@@ -18,4 +18,6 @@ public interface UserService {
 
     userD findUser(loginD login);
 
+    void updateUser(userD user);
+
 }

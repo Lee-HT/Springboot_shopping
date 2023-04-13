@@ -35,4 +35,11 @@
   </delete>
 
   <update id="updateByUser"
+    parameterType="userD">
+    UPDATE user_table
+    SET seller = #{seller}, item_name = #{itemName},
+    item_price = #{itemPrice}, sell_count = #{sellCount},
+    item_stock = #{itemStock}
+    WHERE id = #{id}
+  </update>
 </mapper>
