@@ -10,6 +10,11 @@
     WHERE seller = #{seller}
   </select>
 
+  <select id="selectPostAll"
+  resultType="postD">
+    SELECT * FROM post_table
+  </select>
+
   <select id="selectPostById"
     parameterType="Long"
     resultType="postD">

@@ -12,7 +12,7 @@
   parameterType="Map"
   resultType="userD">
     SELECT * FROM user_table
-    WHERE email = #{emAndPv.email}, provider = #{emAndPv.provider}
+    WHERE email = #{email} AND provider = #{provider}
   </select>
 
   <select id="findUserByUsername"

@@ -33,10 +33,13 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public userD findByEmailProvider(Map<String,String> emAndPv) {
+        log.info("UserService findEmailProvider");
         userD user = userMapper.findByEmailAndProvider(emAndPv);
         if (user != null){
+            log.info(user.getUsername());
             return user;
         }else{
+            log.info("user == null");
             return null;
         }
     }

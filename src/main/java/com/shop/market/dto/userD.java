@@ -21,6 +21,7 @@ public class userD {
     private String password;
     @NotBlank
     private String email;
+    private String picture;
     @NotBlank
     private String provider;
     @NotBlank
@@ -30,9 +31,14 @@ public class userD {
     @NotBlank
     private LocalDateTime updateDate;
 
-    public void update(String email,String provider){
+    public userD update(String email,String picture){
         this.email = email;
-        this.provider = provider;
+        this.picture = picture;
+        return this;
+    }
+
+    public String getRoleKey(){
+        return this.role;
     }
 
 }

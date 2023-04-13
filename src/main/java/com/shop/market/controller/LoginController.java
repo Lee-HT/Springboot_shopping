@@ -5,19 +5,16 @@ import com.shop.market.dto.userD;
 import com.shop.market.service.UserService;
 import java.util.List;
 import java.util.Map;
-
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
@@ -41,9 +38,12 @@ public class LoginController {
         return "redirect:/login/login";
     }
 
-    @PostMapping("findUser")
+    @PostMapping("findEmailProvider")
+    @ResponseBody
     public userD findUser(@RequestBody Map<String,String> emAndPv){
         log.info("Controller findUser");
+        log.info(emAndPv.get("email"));
+        log.info(emAndPv.get("provider"));
         userD user = userService.findByEmailProvider(emAndPv);
         return user;
 
