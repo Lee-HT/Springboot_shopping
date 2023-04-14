@@ -24,7 +24,7 @@ public class OAuthAttributes {
     private static OAuthAttributes ofGoogle(String userNameAttributeName,
             Map<String, Object> attributes){
         return OAuthAttributes.builder()
-                .username((String) attributes.get("username"))
+                .username((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
                 .provider((String) attributes.get("provider"))
                 .picture((String) attributes.get("picture"))

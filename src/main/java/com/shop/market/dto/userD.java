@@ -26,6 +26,7 @@ public class userD {
     private String provider;
     @NotBlank
     private String role;
+    private String nickname;
     @NotBlank
     private LocalDateTime createDate;
     @NotBlank
