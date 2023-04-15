@@ -36,6 +36,8 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
                 .getClientRegistration().getProviderDetails()
                 .getUserInfoEndpoint().getUserNameAttributeName();
 
+        log.info("Attribute get user :" + oAuth2User.getAttributes().get("name"));
+
         OAuthAttributes attributes = OAuthAttributes
                 .of(registrationId,userNameAttributeName,oAuth2User.getAttributes());
 
@@ -57,13 +59,19 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
         Map<String,String> emAndPv = new HashMap<>();
         emAndPv.put("email",attributes.getEmail());
         emAndPv.put("provider",attributes.getProvider());
+        log.info(emAndPv.toString());
         userD user = userMapper.findByEmailAndProvider(emAndPv);
         if (user != null) {
+            log.info("user != null");
             user.update(attributes.getUsername(), attributes.getPicture());
+            userMapper.updateUser(user);
         }else {
+            log.info("user == null");
             user = attributes.toUser();
+            log.info(user.getUsername());
+            userMapper.saveUser(user);
         }
-        userMapper.updateUser(user);
+
         return user;
     }
 

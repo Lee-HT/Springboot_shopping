@@ -24,8 +24,8 @@
 
   <insert id="saveUser"
     parameterType="userD">
-    INSERT INTO user_table(username,password,email)
-    VALUES(#{username},#{password},#{email})
+    INSERT INTO user_table(username,password,email,picture,role)
+    VALUES(#{username},#{password},#{email},#{picture},#{role})
   </insert>
 
   <delete id="deleteUser"

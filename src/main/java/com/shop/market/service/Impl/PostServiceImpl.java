@@ -17,6 +17,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public void savePost(postD post){
         try{
+            log.info("postService save");
             postMapper.insertPostBySeller(post);
         }catch(Exception e){
             log.info("savePost error: " + e);
