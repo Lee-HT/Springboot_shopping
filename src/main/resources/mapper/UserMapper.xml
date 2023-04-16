@@ -24,8 +24,8 @@
 
   <insert id="saveUser"
     parameterType="userD">
-    INSERT INTO user_table(username,password,email,picture,role)
-    VALUES(#{username},#{password},#{email},#{picture},#{role})
+    INSERT INTO user_table(username,password,email,provider,picture,role)
+    VALUES(#{username},#{password},#{email},#{provider},#{picture},#{role})
   </insert>
 
   <delete id="deleteUser"
@@ -38,7 +38,7 @@
     parameterType="userD">
     UPDATE user_table
     SET username = #{username}, password = #{password},
-    email = #{email}, role = #{role}, profile = #{profile},
+    email = #{email}, role = #{role}, picture = #{picture},
     nickname = #{nickname}
     WHERE id = #{id}
   </update>

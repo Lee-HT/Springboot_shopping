@@ -22,18 +22,14 @@ public class userD {
     @NotBlank
     private String email;
     private String picture;
-    @NotBlank
     private String provider;
-    @NotBlank
     private String role;
     private String nickname;
-    @NotBlank
     private LocalDateTime createDate;
-    @NotBlank
     private LocalDateTime updateDate;
 
-    public userD update(String email,String picture){
-        this.email = email;
+    public userD update(String username,String picture){
+        this.username = username;
         this.picture = picture;
         return this;
     }

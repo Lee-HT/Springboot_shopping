@@ -20,7 +20,8 @@ color:blue; px:50px; float:right;
 }
 
 .menu li{
-float:left; margin-right:30px;}
+float:left; margin-right:30px;
+}
 
 .hul{
 list-style:none;
@@ -28,4 +29,8 @@ list-style:none;
 
 .ul search{
 margin-left:30px; px:2em;
+}
+
+.login{
+float:right
 }

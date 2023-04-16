@@ -14,7 +14,6 @@ public class OAuthAttributes {
     private String nameAttributeKey;
     private String username;
     private String email;
-    private String provider;
     private String picture;
 
     public static OAuthAttributes of(String registrationId,
@@ -28,7 +27,6 @@ public class OAuthAttributes {
         return OAuthAttributes.builder()
                 .username((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
-                .provider((String) attributes.get("provider"))
                 .picture((String) attributes.get("picture"))
                 .attributes(attributes)
                 .registrationId(registrationId)
@@ -39,9 +37,10 @@ public class OAuthAttributes {
     public userD toUser(){
         return userD.builder()
                 .username(username)
-                .password(nameAttributeKey + "_" + registrationId)
+                .password(registrationId + username)
                 .email(email)
                 .picture(picture)
+                .provider(registrationId)
                 .role(role.USER.getRole())
                 .build();
     }

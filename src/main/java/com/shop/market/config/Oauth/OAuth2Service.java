@@ -58,12 +58,14 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
         log.info("userSaveOrUpdate");
         Map<String,String> emAndPv = new HashMap<>();
         emAndPv.put("email",attributes.getEmail());
-        emAndPv.put("provider",attributes.getProvider());
+        emAndPv.put("provider", attributes.getRegistrationId());
         log.info(emAndPv.toString());
         userD user = userMapper.findByEmailAndProvider(emAndPv);
         if (user != null) {
             log.info("user != null");
+            log.info("before : "+ user.getUsername());
             user.update(attributes.getUsername(), attributes.getPicture());
+            log.info(String.format("id : %d , username : %s",user.getId(),user.getUsername()));
             userMapper.updateUser(user);
         }else {
             log.info("user == null");
