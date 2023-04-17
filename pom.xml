@@ -81,6 +81,12 @@
 			<version>3.0.1</version>
 		</dependency>
 
+		<!-- spring session jdbc -->
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-jdbc</artifactId>
+		</dependency>
+
 	</dependencies>
 
 

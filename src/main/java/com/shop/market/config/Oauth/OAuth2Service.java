@@ -49,9 +49,6 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey()
         );
-
-
-
     }
 
     private userD saveOrUpdate(OAuthAttributes attributes){

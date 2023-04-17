@@ -31,6 +31,9 @@ spring:
       filter:
         enabled: true
 
+  session:
+    store-type: jdbc
+
 mybatis:
   mapper-locations: classpath*:mapper/**/*.xml
   type-aliases-package: com.shop.market.dto

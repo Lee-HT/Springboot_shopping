@@ -31,7 +31,6 @@ public class ItemViewController {
                 log.info("searchList : empty");
             }
         } else {
-            log.info("searchText : null");
         }
 
         model.addAttribute("searchText", searchText);
