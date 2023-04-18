@@ -3,6 +3,11 @@
   로그인 화면
 </h1>
 <div class="col-md-12">
+  <div class="login">
+    {{#username}}
+      <h4>login as {{username}}</h4>
+    {{/username}}
+  </div>
   <div class="col-md-3">
     <form action="/loginProcess/login" method="post">
       <div class="form-group">
@@ -18,7 +23,8 @@
   <div class="col-md-6">
     <h2>
       <div class="row">
-        <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">google login</a>
+        <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">google
+          login</a>
       </div>
       <br>
       <div class="row">

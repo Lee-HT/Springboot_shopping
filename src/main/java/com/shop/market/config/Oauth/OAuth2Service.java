@@ -30,6 +30,7 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
         log.info("loadUser start");
         OAuth2UserService delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
+//        Object accessToken = userRequest.getAccessToken().getTokenValue();
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         String userNameAttributeName = userRequest

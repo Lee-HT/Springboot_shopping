@@ -26,6 +26,13 @@ spring:
       name: user
       password: password
 
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
   mvc:
     hiddenmethod:
       filter:

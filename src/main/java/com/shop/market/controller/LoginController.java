@@ -30,7 +30,7 @@ public class LoginController {
     }
 
     @PostMapping("findUserAll")
-    public String findUserAll(@RequestBody loginD login){
+    public String findUserAll(@RequestBody loginD login) {
         log.info("Controller findUserAll");
         userD user = userService.findUser(login);
         log.info(user.getUsername());
@@ -40,7 +40,7 @@ public class LoginController {
 
     @PostMapping("findEmailProvider")
     @ResponseBody
-    public userD findUser(@RequestBody Map<String,String> emAndPv){
+    public userD findUser(@RequestBody Map<String, String> emAndPv) {
         log.info("Controller findUser");
         log.info(emAndPv.get("email"));
         log.info(emAndPv.get("provider"));
@@ -66,7 +66,7 @@ public class LoginController {
     }
 
     @DeleteMapping("unregister")
-    public String unRegister(@RequestBody loginD login){
+    public String unRegister(@RequestBody loginD login) {
         log.info("Controller unregister");
         userService.unregister(login.getUsername());
         return "redirect:/login/login";
@@ -74,7 +74,7 @@ public class LoginController {
 
     @PostMapping("users")
     @ResponseBody
-    public ResponseEntity<List<userD>> userList(){
+    public ResponseEntity<List<userD>> userList() {
         log.info("Controller find user All");
         List<userD> userList = userService.findUserAll();
 
@@ -83,7 +83,7 @@ public class LoginController {
 
     @PutMapping("update")
     @ResponseBody
-    public userD updateUser(userD user){
+    public userD updateUser(userD user) {
         log.info("LoginController update");
         userService.updateUser(user);
 
