@@ -34,8 +34,8 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().disable();
         http.csrf().disable();
-//        http.httpBasic().disable();
-//        http.formLogin().disable();
+        http.httpBasic().disable();
+        http.formLogin().disable();
 
         http.logout()
                 .logoutSuccessUrl("/");

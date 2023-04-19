@@ -1,17 +1,29 @@
 {{>layout/header}}
 <h1>HomePage</h1>
 <div class="col-md-12">
-    <div class="row">
-        <div class="col-md-12">
-            <a href="post/savePost" role="button" class="btn btn-info active">post save</a>
-            <a href="/logout" class="btn btn-info active" role="button">Logout</a>
-            <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">google login</a>
-            <div class="login">
-                {{#username}}
-                    login as : {{username}}
-                {{/username}}
-            </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="left">
+        <a href="post/savePost" role="button" class="btn btn-info active">post save</a>
+        <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+      </div>
+      <div class="right">
+        {{#username}}
+          login as : {{username}}
+        {{/username}}
+      </div>
+      {{^username}}
+        <div class="col-md-6">
+          <div class="right">
+            <a href="/oauth2/authorization/google"
+               class="btn btn-success active" role="button">Google login</a>
+            <a href="/oauth2/authorization/naver"
+               class="btn btn-success active" role="button">Naver login</a>
+          </div>
         </div>
+      {{/username}}
     </div>
+  </div>
+</div>
 </div>
 {{>layout/footer}}

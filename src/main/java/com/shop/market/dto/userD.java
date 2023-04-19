@@ -5,10 +5,11 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Builder
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
 public class userD {
@@ -34,8 +35,8 @@ public class userD {
         return this;
     }
 
-    public String getRoleKey(){
-        return this.role;
+    public String getRole(){
+        return role;
     }
 
 }

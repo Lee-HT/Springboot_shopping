@@ -37,7 +37,8 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
                 .getClientRegistration().getProviderDetails()
                 .getUserInfoEndpoint().getUserNameAttributeName();
 
-        log.info("Attribute get user :" + oAuth2User.getAttributes().get("name"));
+        log.info("userNameAttributeName : " + userNameAttributeName);
+        log.info("Attribute : " + oAuth2User.getAttributes().toString());
 
         OAuthAttributes attributes = OAuthAttributes
                 .of(registrationId,userNameAttributeName,oAuth2User.getAttributes());
@@ -46,7 +47,7 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
         httpSession.setAttribute("user", new SessionUser(user));
 
         return new DefaultOAuth2User(
-                Collections.singleton(new SimpleGrantedAuthority(user.getRoleKey())),
+                Collections.singleton(new SimpleGrantedAuthority(user.getRole())),
                 attributes.getAttributes(),
                 attributes.getNameAttributeKey()
         );
