@@ -37,6 +37,8 @@ public class SecurityConfig {
         http.httpBasic().disable();
         http.formLogin().disable();
 
+
+
         http.logout()
                 .logoutSuccessUrl("/");
 

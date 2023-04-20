@@ -5,12 +5,7 @@
     <div class="col-md-12">
       <div class="left">
         <a href="post/savePost" role="button" class="btn btn-info active">post save</a>
-        <a href="/logout" class="btn btn-info active" role="button">Logout</a>
-      </div>
-      <div class="right">
-        {{#username}}
-          Login as : {{username}}
-        {{/username}}
+        <a href="/logout" class="btn btn-success active" role="button">Logout</a>
       </div>
       {{^username}}
         <div class="col-md-6">
@@ -20,6 +15,11 @@
             <a href="/oauth2/authorization/naver"
                class="btn btn-success active" role="button">Naver login</a>
           </div>
+        </div>
+        <div class="right">
+          {{#username}}
+            Login as : {{username}}
+          {{/username}}
         </div>
       {{/username}}
     </div>
