@@ -73,7 +73,6 @@ public class JwtTokenProvider {
     }
 
     public Authentication getAuthentication(String token){
-        OAuth2User oAuth2User = oAuth2Service.loadUser();
         return new UsernamePasswordAuthenticationToken();
     }
 
