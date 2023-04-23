@@ -1,6 +1,6 @@
 package com.shop.market.controller;
 
-import com.shop.market.enums.role;
+import com.shop.market.enums.Role;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ public class HomeController {
     @GetMapping("test")
     @ResponseBody
     public String home(){
-        String testResult = role.USER.getRole();
+        String testResult = Role.USER.getValue();
         log.info(testResult);
         return testResult;
     }

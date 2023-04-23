@@ -1,20 +1,17 @@
 package com.shop.market.dto;
 
+import com.shop.market.enums.Role;
 import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Builder
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
+@ToString
 public class userD {
 
-    @NotBlank
     private Long id;
     @NotBlank
     private String username;
@@ -35,8 +32,9 @@ public class userD {
         return this;
     }
 
-    public String getRole(){
-        return role;
+    public userD updateRole(String role){
+        this.role = role;
+        return this;
     }
 
 }

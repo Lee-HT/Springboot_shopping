@@ -36,20 +36,21 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
         String userNameAttributeName = userRequest
                 .getClientRegistration().getProviderDetails()
                 .getUserInfoEndpoint().getUserNameAttributeName();
+        Map<String,Object> attributes = oAuth2User.getAttributes();
 
         log.info("userNameAttributeName : " + userNameAttributeName);
         log.info("Attribute : " + oAuth2User.getAttributes().toString());
 
-        OAuthAttributes attributes = OAuthAttributes
-                .of(registrationId,userNameAttributeName,oAuth2User.getAttributes());
+        OAuthAttributes oAuthAttributes = OAuthAttributes
+                .of(registrationId,userNameAttributeName,attributes);
 
-        userD user = saveOrUpdate(attributes);
+        userD user = saveOrUpdate(oAuthAttributes);
         httpSession.setAttribute("user", new SessionUser(user));
+        log.info("http session");
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRole())),
-                attributes.getAttributes(),
-                attributes.getNameAttributeKey()
+                attributes, userNameAttributeName
         );
     }
 
@@ -73,6 +74,7 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
             userMapper.saveUser(user);
         }
 
+        log.info(user.toString());
         return user;
     }
 

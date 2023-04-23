@@ -1,17 +1,16 @@
 package com.shop.market.config.Oauth;
 
 import com.shop.market.dto.userD;
-import com.shop.market.enums.role;
+import com.shop.market.enums.Role;
 import java.util.Map;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 
 @Builder
 @Getter
 public class OAuthAttributes {
     private String registrationId;
-    private Map<String,Object> attributes;
-    private String nameAttributeKey;
     private String attributeKey;
     private String username;
     private String nickname;
@@ -21,10 +20,13 @@ public class OAuthAttributes {
     public static OAuthAttributes of(String registrationId,
             String userNameAttributeName,
             Map<String,Object> attributes){
-        if ("naver".equals(registrationId)){
+        if (registrationId.equals("naver")){
             return ofNaver("id",registrationId,attributes);
+        } else if (registrationId.equals("google")) {
+            return ofGoogle(userNameAttributeName,registrationId,attributes);
+        }else{
+            throw new OAuth2AuthenticationException("허용 되지 않는 인증");
         }
-        return ofGoogle(userNameAttributeName,registrationId,attributes);
     }
     private static OAuthAttributes ofGoogle(String userNameAttributeName,
             String registrationId,
@@ -34,13 +36,11 @@ public class OAuthAttributes {
                 .email((String) attributes.get("email"))
                 .picture((String) attributes.get("picture"))
                 .attributeKey((String) attributes.get(userNameAttributeName))
-                .attributes(attributes)
                 .registrationId(registrationId)
-                .nameAttributeKey(userNameAttributeName)
                 .build();
     }
 
-    private static OAuthAttributes ofNaver(String usernameAttributeName,
+    private static OAuthAttributes ofNaver(String userNameAttributeName,
             String registrationId,
             Map<String, Object> attributes){
         Map<String,Object> response = (Map<String,Object>) attributes.get("response");
@@ -48,10 +48,8 @@ public class OAuthAttributes {
                 .username((String) response.get("nickname"))
                 .email((String) response.get("email"))
                 .picture((String) response.get("profile_image"))
-                .attributeKey((String) response.get(usernameAttributeName))
-                .attributes(response)
+                .attributeKey((String) response.get(userNameAttributeName))
                 .registrationId(registrationId)
-                .nameAttributeKey(usernameAttributeName)
                 .build();
     }
 
@@ -62,7 +60,7 @@ public class OAuthAttributes {
                 .email(email)
                 .picture(picture)
                 .provider(registrationId)
-                .role(role.USER.getRole())
+                .role(Role.USER.getValue())
                 .build();
     }
 }

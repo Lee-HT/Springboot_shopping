@@ -85,6 +85,7 @@ public class LoginController {
     @ResponseBody
     public userD updateUser(userD user) {
         log.info("LoginController update");
+        log.info(user.getUsername());
         userService.updateUser(user);
 
         return user;

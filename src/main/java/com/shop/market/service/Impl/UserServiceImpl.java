@@ -2,6 +2,7 @@ package com.shop.market.service.Impl;
 
 import com.shop.market.dto.loginD;
 import com.shop.market.dto.userD;
+import com.shop.market.enums.Role;
 import com.shop.market.repository.UserMapper;
 import com.shop.market.service.UserService;
 import java.util.List;
@@ -47,7 +48,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void register(userD user){
         log.info("UserService register");
-        userMapper.saveUser(user);
+        userMapper.saveUser(userD.builder().username(user.getUsername())
+                .password(user.getPassword())
+                .email(user.getEmail())
+                .role(Role.USER.getValue()).build());
     }
 
     @Override

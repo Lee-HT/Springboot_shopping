@@ -1,7 +1,6 @@
 package com.shop.market.config;
 
 import com.shop.market.config.Oauth.OAuth2Service;
-import com.shop.market.config.jwt.JwtAuthenticationFIlter;
 import com.shop.market.filter.JwtFilter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +23,6 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 @Slf4j
 public class SecurityConfig {
     private final OAuth2Service oAuth2Service;
-    private final JwtFilter jwtFilter;
 
     @Bean
     public PasswordEncoder PasswordEncoder() {
@@ -46,23 +44,24 @@ public class SecurityConfig {
         http.logout()
                 .logoutSuccessUrl("/");
 
-        http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // 세션 생성x (jwt 사용시)
+//        http.sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(jwtFilter, LogoutFilter.class);
+//        http.addFilterBefore(new JwtFilter(), LogoutFilter.class);
 
-        http.authorizeHttpRequests((authz) -> authz
+        http.authorizeHttpRequests(auth -> auth
                 // 정적 자원 접근 허용
-                .requestMatchers("/", "/login/**", "/item/**", "/post/**", "/jpa/**").permitAll()
+                .requestMatchers("/", "/login/**", "/item/**", "/post/**", "/jpa/**","/home/**").permitAll()
                 .requestMatchers("/postProcess/savePost").hasRole("USER")
-                .anyRequest().authenticated());
+                .anyRequest().authenticated()
+        );
 
 //        http.apply(new CustomDsl());
 //
         log.info("before oauth");
 
         http.oauth2Login()
-                .loginPage("/login/login")
                 .userInfoEndpoint()
                 .userService(oAuth2Service);
 
