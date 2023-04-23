@@ -44,7 +44,7 @@ public class SecurityConfig {
         http.logout()
                 .logoutSuccessUrl("/");
 
-        // 세션 생성x (jwt 사용시)
+        // 세션 생성 x, 기존 세션 사용 x (jwt 사용시)
 //        http.sessionManagement()
 //                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
