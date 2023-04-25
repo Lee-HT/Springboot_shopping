@@ -8,11 +8,11 @@
     SELECT * FROM user_table
   </select>
 
-  <select id="findByEmailAndProvider"
-  parameterType="String"
+  <select id="findByEmail"
+  parameterType="Map"
   resultType="userD">
     SELECT * FROM user_table
-    WHERE email = #{email}, provider = #{provider}
+    WHERE email = #{email}
   </select>
 
   <select id="findUserByUsername"
@@ -24,8 +24,8 @@
 
   <insert id="saveUser"
     parameterType="userD">
-    INSERT INTO user_table(username,password,email)
-    VALUES(#{username},#{password},#{email})
+    INSERT INTO user_table(username,password,email,provider,picture,role)
+    VALUES(#{username},#{password},#{email},#{provider},#{picture},#{role})
   </insert>
 
   <delete id="deleteUser"
@@ -34,5 +34,12 @@
     where username = #{username}
   </delete>
 
-  <update id="updateByUser"
+  <update id="updateUser"
+    parameterType="userD">
+    UPDATE user_table
+    SET username = #{username}, password = #{password},
+    email = #{email}, role = #{role}, picture = #{picture},
+    nickname = #{nickname}
+    WHERE id = #{id}
+  </update>
 </mapper>

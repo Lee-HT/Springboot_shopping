@@ -1,19 +1,17 @@
 package com.shop.market.dto;
 
+import com.shop.market.enums.Role;
 import jakarta.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.ToString;
 
 @Builder
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
+@ToString
 public class userD {
 
-    @NotBlank
     private Long id;
     @NotBlank
     private String username;
@@ -21,18 +19,22 @@ public class userD {
     private String password;
     @NotBlank
     private String email;
-    @NotBlank
+    private String picture;
     private String provider;
-    @NotBlank
     private String role;
-    @NotBlank
+    private String nickname;
     private LocalDateTime createDate;
-    @NotBlank
     private LocalDateTime updateDate;
 
-    public void update(String email,String provider){
-        this.email = email;
-        this.provider = provider;
+    public userD update(String username,String picture){
+        this.username = username;
+        this.picture = picture;
+        return this;
+    }
+
+    public userD updateRole(String role){
+        this.role = role;
+        return this;
     }
 
 }

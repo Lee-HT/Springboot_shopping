@@ -1,14 +1,9 @@
 package com.shop.market.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Builder
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+@Getter
 public class postD {
     private String seller;
 

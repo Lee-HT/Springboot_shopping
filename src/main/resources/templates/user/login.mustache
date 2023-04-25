@@ -3,6 +3,11 @@
   로그인 화면
 </h1>
 <div class="col-md-12">
+  <div class="login">
+    {{#username}}
+      <h5>login as {{username}}</h5>
+    {{/username}}
+  </div>
   <div class="col-md-3">
     <form action="/loginProcess/login" method="post">
       <div class="form-group">
@@ -16,9 +21,20 @@
     </form>
   </div>
   <div class="col-md-6">
-    <h1>
-      <a href="/login/register">회원가입</a>
-    </h1>
+    <h2>
+      <div class="row">
+        <a href="/oauth2/authorization/google"
+           class="btn btn-success active" role="button">Google login</a>
+        <a href="/oauth2/authorization/naver"
+           class="btn btn-success active" role="button">Naver login</a>
+        <a href="/logout"
+           class="btn btn-success active" role="button">Logout</a>
+      </div>
+      <br>
+      <div class="row">
+        <a href="/login/register">회원가입</a>
+      </div>
+    </h2>
   </div>
 </div>
 {{>layout/footer}}

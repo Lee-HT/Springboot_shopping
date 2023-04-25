@@ -4,6 +4,7 @@ import com.shop.market.dto.itemD;
 import com.shop.market.repository.ItemMapper;
 import com.shop.market.service.ItemService;
 import java.util.List;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,19 +48,20 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    public itemD updateItem(itemD item){
+    public itemD updateItem(Map<String,Object> item){
         log.info("itemService updateItem");
         try{
-            log.info(item.getItemName());
-            itemD newItem = itemMapper.searchItemByItemName(item.getItemName());
-            Long id = newItem.getId();
+            log.info(item.get("itemName").toString());
+            itemD beforeItem = itemMapper.selectItemByItemName(item.get("itemName").toString());
+            Long id = beforeItem.getId();
             log.info(id.toString());
+
             itemMapper.updateItem(itemD.builder().id(id)
-                    .seller(item.getSeller())
-                    .itemName(item.getItemName())
-                    .itemPrice(item.getItemPrice())
-                    .sellCount(item.getSellCount())
-                    .itemStock(item.getItemStock())
+                    .seller(beforeItem.getSeller())
+                    .itemName(item.get("itemName").toString())
+                    .itemPrice(Integer.parseInt(item.get("itemPrice").toString()))
+                    .sellCount(beforeItem.getSellCount())
+                    .itemStock(Integer.parseInt(item.get("itemStock").toString()))
                     .build());
             log.info(itemMapper.searchItemById(id).getItemName());
             return itemMapper.searchItemById(id);

@@ -1,5 +1,5 @@
 .header {
-height:120px; background-color:#30FF93; border: 1px solid #253342;
+height:120px; background-color:#33FF99; border: 1px solid #253342;
 position:fixed; width: 90%; z-index:9999; top:0; left:5%; right:5%;
 }
 
@@ -20,7 +20,8 @@ color:blue; px:50px; float:right;
 }
 
 .menu li{
-float:left; margin-right:30px;}
+float:left; margin-right:30px;
+}
 
 .hul{
 list-style:none;
@@ -28,4 +29,16 @@ list-style:none;
 
 .ul search{
 margin-left:30px; px:2em;
+}
+
+.login{
+float:right
+}
+
+.left{
+float:left
+}
+
+.right{
+float:right
 }

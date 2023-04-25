@@ -4,6 +4,7 @@ import com.shop.market.dto.loginD;
 import com.shop.market.dto.userD;
 import com.shop.market.service.UserService;
 import java.util.List;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,9 +12,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
@@ -29,7 +30,7 @@ public class LoginController {
     }
 
     @PostMapping("findUserAll")
-    public String findUserAll(@RequestBody loginD login){
+    public String findUserAll(@RequestBody loginD login) {
         log.info("Controller findUserAll");
         userD user = userService.findUser(login);
         log.info(user.getUsername());
@@ -37,12 +38,13 @@ public class LoginController {
         return "redirect:/login/login";
     }
 
-    @PostMapping("findUser")
-    public userD findUser(@RequestBody Long id){
+    @PostMapping("findEmail")
+    @ResponseBody
+    public userD findUser(@RequestBody String email) {
         log.info("Controller findUser");
-        userD user = userService.findUser(id);
+        log.info(email);
+        userD user = userService.findByEmail(email);
         return user;
-
     }
 
     @PostMapping("login")
@@ -62,18 +64,29 @@ public class LoginController {
     }
 
     @DeleteMapping("unregister")
-    public String unRegister(@RequestBody loginD login){
+    public String unRegister(@RequestBody loginD login) {
         log.info("Controller unregister");
         userService.unregister(login.getUsername());
+
         return "redirect:/login/login";
     }
 
     @PostMapping("users")
     @ResponseBody
-    public ResponseEntity<List<userD>> userList(){
+    public ResponseEntity<List<userD>> userList() {
         log.info("Controller find user All");
         List<userD> userList = userService.findUserAll();
 
         return ResponseEntity.status(HttpStatus.OK).body(userList);
+    }
+
+    @PutMapping("update")
+    @ResponseBody
+    public userD updateUser(userD user) {
+        log.info("LoginController update");
+        log.info(user.getUsername());
+        userService.updateUser(user);
+
+        return user;
     }
 }

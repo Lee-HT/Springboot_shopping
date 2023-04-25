@@ -1,55 +1,69 @@
 package com.shop.market.config;
 
-import com.shop.market.config.Service.OAuthService;
+import com.shop.market.config.Filter.JwtFilter;
+import com.shop.market.config.Oauth.OAuth2Service;
+import com.shop.market.config.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@Slf4j
 public class SecurityConfig {
-
-    private final OAuthService oAuthService;
+    private final OAuth2Service oAuth2Service;
+    private final TokenProvider tokenProvider;
 
     @Bean
-    public PasswordEncoder PasswordEncoder(){
+    public PasswordEncoder PasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()); //정적 리소스 시큐리티 적용 무시
+    }
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().disable();
         http.csrf().disable();
         http.httpBasic().disable();
         http.formLogin().disable();
 
-        http.logout().logoutSuccessUrl("/");
+        http.logout()
+                .logoutSuccessUrl("/");
 
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // 세션 생성 x, 기존 세션 사용 x (jwt 사용시)
+//        http.sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.authorizeHttpRequests((authz)-> authz
-                .requestMatchers("/").permitAll()
-                .anyRequest().permitAll());
-        http.oauth2Login().userInfoEndpoint().userService(oAuthService);
+        http.addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
+
+        http.authorizeHttpRequests(auth -> auth
+                // 정적 자원 접근 허용
+                .requestMatchers("/", "/login/**", "/item/**", "/post/**", "/jpa/**","/home/**").permitAll()
+                .requestMatchers("/postProcess/savePost").hasRole("USER")
+                .anyRequest().authenticated()
+        );
+
+        log.info("before oauth");
+
+        http.oauth2Login()
+                .userInfoEndpoint()
+                .userService(oAuth2Service);
 
         return http.build();
     }
-
-    public class MyCustomDsl extends AbstractHttpConfigurer<MyCustomDsl, HttpSecurity>{
-        @Override
-        public void configure(HttpSecurity http) throws Exception{
-            AuthenticationManager authenticationManager = http.getSharedObject(AuthenticationManager.class);
-        }
-    }
-
 }

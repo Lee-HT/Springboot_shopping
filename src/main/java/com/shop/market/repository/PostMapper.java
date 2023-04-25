@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface PostMapper {
     List<postD> selectPostBySeller(String seller);
     postD selectPostById(Long id);
+    List<postD> selectPostAll();
     void insertPostBySeller(postD post);
     void deletePostById(Long id);
 

@@ -1,25 +1,35 @@
 package com.shop.market.entity;
 
-import java.time.LocalDateTime;
+import com.shop.market.enums.Role;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class userE {
+@Entity
+@Getter
+@Table(name="user_table")
+public class userE extends BaseTimeE{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(length = 50,unique = true, nullable = false)
     private String username;
-
+    @Column(nullable = false)
     private String password;
-
+    @Column(unique = true)
     private String email;
+    @Column(length = 30)
+    private String provider;
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+    private String picture;
+    @Column(length = 15)
+    private String nickname;
 
-    private String role;
-
-    private LocalDateTime createDate;
-
-    private LocalDateTime updateDate;
 }

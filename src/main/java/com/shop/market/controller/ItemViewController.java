@@ -3,13 +3,14 @@ package com.shop.market.controller;
 import com.shop.market.dto.itemD;
 import com.shop.market.service.ItemService;
 import java.util.List;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
@@ -19,18 +20,31 @@ public class ItemViewController {
     @Autowired
     public ItemService itemService;
 
-    @GetMapping("search/{searchText}")
-    public String SearchItemView(@PathVariable String searchText, Model model){
+    @GetMapping("search")
+    public String SearchItemView(@RequestParam(defaultValue = "") String searchText, Model model) {
         log.info("itemView search");
         List<itemD> searchList = null;
-        if(searchText == null){
+        log.info("searchText : " + searchText);
+        if (!(searchText == null || searchText.equals(""))) {
             searchList = itemService.searchByItemName(searchText);
-        }else{
-            log.info("searchText == null");
+            if (searchList.isEmpty()) {
+                log.info("searchList : empty");
+            }
+        } else {
         }
 
-        model.addAttribute("searchText",searchText);
-        model.addAttribute("searchList",searchList);
+        model.addAttribute("searchText", searchText);
+        model.addAttribute("searchList", searchList);
         return "item/searchItem";
+    }
+
+    @GetMapping("update")
+    public String updateItemView(
+            @RequestParam(required = false) Map<String,Object> item, Model model) {
+        model.addAttribute("itemName", item.get("itemName"));
+        model.addAttribute("itemPrice", item.get("itemPrice"));
+        model.addAttribute("itemStock", item.get("itemStock"));
+
+        return "item/itemModify";
     }
 }

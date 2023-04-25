@@ -17,11 +17,24 @@ public class PostServiceImpl implements PostService {
     @Override
     public void savePost(postD post){
         try{
+            log.info("postService save");
             postMapper.insertPostBySeller(post);
         }catch(Exception e){
             log.info("savePost error: " + e);
         }
     };
+
+    @Override
+    public List<postD> postAll(){
+        log.info("postService selectAll");
+        return postMapper.selectPostAll();
+    }
+
+    @Override
+    public postD selectPostById(Long id){
+        log.info("postService selectPostById");
+        return postMapper.selectPostById(id);
+    }
 
     @Override
     public List<postD> sellerPost(String seller){

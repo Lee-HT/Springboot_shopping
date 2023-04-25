@@ -2,17 +2,16 @@ package com.shop.market.repository;
 
 import com.shop.market.dto.userD;
 import java.util.List;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserMapper {
 
     List<userD> selectUserAll();
 
-    userD findByEmailAndProvider(Long id);
+    userD findByEmail(String email);
 
     userD findUserByUsername(String username);
 
@@ -20,5 +19,5 @@ public interface UserMapper {
 
     void deleteUser(String username);
 
-
+    void updateUser(userD user);
 }
