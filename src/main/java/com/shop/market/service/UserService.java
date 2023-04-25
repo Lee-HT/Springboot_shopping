@@ -10,7 +10,7 @@ public interface UserService {
 
     List<userD> findUserAll();
 
-    userD findByEmailProvider(Map<String,String> emAndPv);
+    userD findByEmail(String email);
 
     void register(userD user);
 

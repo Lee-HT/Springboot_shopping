@@ -46,3 +46,7 @@ mybatis:
   type-aliases-package: com.shop.market.dto
   configuration:
     map-underscore-to-camel-case: true
+
+jwt:
+  header: Authentication
+  token-validity-in-seconds: 86400

@@ -33,9 +33,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public userD findByEmailProvider(Map<String,String> emAndPv) {
+    public userD findByEmail(String email) {
         log.info("UserService findEmailProvider");
-        userD user = userMapper.findByEmailAndProvider(emAndPv);
+        userD user = userMapper.findByEmail(email);
         if (user != null){
             log.info(user.getUsername());
             return user;

@@ -8,11 +8,11 @@
     SELECT * FROM user_table
   </select>
 
-  <select id="findByEmailAndProvider"
+  <select id="findByEmail"
   parameterType="Map"
   resultType="userD">
     SELECT * FROM user_table
-    WHERE email = #{email} AND provider = #{provider}
+    WHERE email = #{email}
   </select>
 
   <select id="findUserByUsername"

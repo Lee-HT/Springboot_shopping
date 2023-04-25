@@ -11,7 +11,7 @@ public interface UserMapper {
 
     List<userD> selectUserAll();
 
-    userD findByEmailAndProvider(Map<String,String> emAndPv);
+    userD findByEmail(String email);
 
     userD findUserByUsername(String username);
 

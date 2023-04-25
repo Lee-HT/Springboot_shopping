@@ -1,7 +1,8 @@
 package com.shop.market.config;
 
+import com.shop.market.config.Filter.JwtFilter;
 import com.shop.market.config.Oauth.OAuth2Service;
-import com.shop.market.filter.JwtFilter;
+import com.shop.market.config.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -10,12 +11,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.logout.LogoutFilter;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -23,6 +23,7 @@ import org.springframework.security.web.authentication.logout.LogoutFilter;
 @Slf4j
 public class SecurityConfig {
     private final OAuth2Service oAuth2Service;
+    private final TokenProvider tokenProvider;
 
     @Bean
     public PasswordEncoder PasswordEncoder() {
@@ -48,7 +49,7 @@ public class SecurityConfig {
 //        http.sessionManagement()
 //                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-//        http.addFilterBefore(new JwtFilter(), LogoutFilter.class);
+        http.addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
 
         http.authorizeHttpRequests(auth -> auth
                 // 정적 자원 접근 허용
@@ -57,8 +58,6 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
         );
 
-//        http.apply(new CustomDsl());
-//
         log.info("before oauth");
 
         http.oauth2Login()
@@ -67,13 +66,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-    public class CustomDsl extends AbstractHttpConfigurer<CustomDsl,HttpSecurity>{
-        @Override
-        public void configure(HttpSecurity http) throws Exception{
-        }
-    }
-
-
-
 }

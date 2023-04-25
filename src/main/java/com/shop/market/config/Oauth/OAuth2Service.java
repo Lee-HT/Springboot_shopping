@@ -30,7 +30,6 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
         log.info("loadUser start");
         OAuth2UserService delegate = new DefaultOAuth2UserService();
         OAuth2User oAuth2User = delegate.loadUser(userRequest);
-//        Object accessToken = userRequest.getAccessToken().getTokenValue();
 
         String registrationId = userRequest.getClientRegistration().getRegistrationId();
         String userNameAttributeName = userRequest
@@ -46,7 +45,6 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
 
         userD user = saveOrUpdate(oAuthAttributes);
         httpSession.setAttribute("user", new SessionUser(user));
-        log.info("http session");
 
         return new DefaultOAuth2User(
                 Collections.singleton(new SimpleGrantedAuthority(user.getRole())),
@@ -55,12 +53,9 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
     }
 
     private userD saveOrUpdate(OAuthAttributes attributes){
-        log.info("userSaveOrUpdate");
-        Map<String,String> emAndPv = new HashMap<>();
-        emAndPv.put("email",attributes.getEmail());
-        emAndPv.put("provider", attributes.getRegistrationId());
-        log.info(emAndPv.toString());
-        userD user = userMapper.findByEmailAndProvider(emAndPv);
+        String email = attributes.getEmail();
+        log.info(email.toString());
+        userD user = userMapper.findByEmail(email);
         if (user != null) {
             log.info("user != null");
             log.info("before : "+ user.getUsername());

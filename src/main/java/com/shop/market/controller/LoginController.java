@@ -38,15 +38,13 @@ public class LoginController {
         return "redirect:/login/login";
     }
 
-    @PostMapping("findEmailProvider")
+    @PostMapping("findEmail")
     @ResponseBody
-    public userD findUser(@RequestBody Map<String, String> emAndPv) {
+    public userD findUser(@RequestBody String email) {
         log.info("Controller findUser");
-        log.info(emAndPv.get("email"));
-        log.info(emAndPv.get("provider"));
-        userD user = userService.findByEmailProvider(emAndPv);
+        log.info(email);
+        userD user = userService.findByEmail(email);
         return user;
-
     }
 
     @PostMapping("login")
@@ -69,6 +67,7 @@ public class LoginController {
     public String unRegister(@RequestBody loginD login) {
         log.info("Controller unregister");
         userService.unregister(login.getUsername());
+
         return "redirect:/login/login";
     }
 
