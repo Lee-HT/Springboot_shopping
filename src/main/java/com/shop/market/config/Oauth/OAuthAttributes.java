@@ -20,6 +20,7 @@ public class OAuthAttributes {
     public static OAuthAttributes of(String registrationId,
             String userNameAttributeName,
             Map<String,Object> attributes){
+        // provider에 따라 생성자 구별
         if (registrationId.equals("naver")){
             return ofNaver("id",registrationId,attributes);
         } else if (registrationId.equals("google")) {
@@ -28,6 +29,7 @@ public class OAuthAttributes {
             throw new OAuth2AuthenticationException("허용 되지 않는 인증");
         }
     }
+
     private static OAuthAttributes ofGoogle(String userNameAttributeName,
             String registrationId,
             Map<String, Object> attributes){
@@ -39,7 +41,6 @@ public class OAuthAttributes {
                 .registrationId(registrationId)
                 .build();
     }
-
     private static OAuthAttributes ofNaver(String userNameAttributeName,
             String registrationId,
             Map<String, Object> attributes){

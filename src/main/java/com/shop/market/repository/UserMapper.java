@@ -13,7 +13,7 @@ public interface UserMapper {
 
     userD findByEmail(String email);
 
-    userD findUserByUsername(String username);
+    userD findByUsername(String username);
 
     void saveUser(userD userD);
 

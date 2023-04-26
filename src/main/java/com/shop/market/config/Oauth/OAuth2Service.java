@@ -44,6 +44,7 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
                 .of(registrationId,userNameAttributeName,attributes);
 
         userD user = saveOrUpdate(oAuthAttributes);
+        // 직렬화를 위한 SessionUser 생성
         httpSession.setAttribute("user", new SessionUser(user));
 
         return new DefaultOAuth2User(
@@ -52,6 +53,7 @@ public class OAuth2Service implements OAuth2UserService<OAuth2UserRequest, OAuth
         );
     }
 
+    // DB에 유저 정보가 없으면 새 정보 insert 있다면 기존 정보 update
     private userD saveOrUpdate(OAuthAttributes attributes){
         String email = attributes.getEmail();
         log.info(email.toString());

@@ -1,10 +1,13 @@
 package com.shop.market.config.Filter;
 
+import com.shop.market.config.Oauth.LoginUser;
 import com.shop.market.config.jwt.TokenProvider;
+import com.shop.market.dto.userD;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +20,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
     private final TokenProvider tokenProvider;
 
     @Override

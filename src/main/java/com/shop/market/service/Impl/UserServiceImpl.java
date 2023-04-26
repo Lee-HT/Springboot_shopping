@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public userD findUser(loginD login){
         log.info("UserService findUser");
-        userD user = userMapper.findUserByUsername(login.getUsername());
+        userD user = userMapper.findByUsername(login.getUsername());
 
         return user;
     }

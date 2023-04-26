@@ -9,13 +9,13 @@
   </select>
 
   <select id="findByEmail"
-  parameterType="Map"
+  parameterType="String"
   resultType="userD">
     SELECT * FROM user_table
     WHERE email = #{email}
   </select>
 
-  <select id="findUserByUsername"
+  <select id="findByUsername"
     parameterType="String"
     resultType="userD">
     SELECT * FROM user_table

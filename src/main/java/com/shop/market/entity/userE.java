@@ -23,12 +23,12 @@ public class userE extends BaseTimeE{
     private String password;
     @Column(unique = true)
     private String email;
+    private String picture;
     @Column(length = 30)
     private String provider;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
-    private String picture;
     @Column(length = 15)
     private String nickname;
 

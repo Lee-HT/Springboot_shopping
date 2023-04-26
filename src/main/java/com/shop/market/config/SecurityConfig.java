@@ -1,6 +1,6 @@
 package com.shop.market.config;
 
-import com.shop.market.config.Filter.JwtFilter;
+import com.shop.market.config.Filter.JwtAuthenticationFilter;
 import com.shop.market.config.Oauth.OAuth2Service;
 import com.shop.market.config.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -33,8 +33,10 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring()
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()); //정적 리소스 시큐리티 적용 무시
+                .requestMatchers(
+                        PathRequest.toStaticResources().atCommonLocations()); //정적 리소스 시큐리티 적용 무시
     }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().disable();
@@ -46,14 +48,16 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/");
 
         // 세션 생성 x, 기존 세션 사용 x (jwt 사용시)
-//        http.sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(new JwtAuthenticationFilter(tokenProvider),
+                UsernamePasswordAuthenticationFilter.class);
 
         http.authorizeHttpRequests(auth -> auth
                 // 정적 자원 접근 허용
-                .requestMatchers("/", "/login/**", "/item/**", "/post/**", "/jpa/**","/home/**").permitAll()
+                .requestMatchers("/", "/login/**", "/item/**", "/post/**", "/jpa/**", "/home/**")
+                .permitAll()
                 .requestMatchers("/postProcess/savePost").hasRole("USER")
                 .anyRequest().authenticated()
         );
@@ -61,6 +65,8 @@ public class SecurityConfig {
         log.info("before oauth");
 
         http.oauth2Login()
+                .loginPage("/login/login")
+                .defaultSuccessUrl("/")
                 .userInfoEndpoint()
                 .userService(oAuth2Service);
 
