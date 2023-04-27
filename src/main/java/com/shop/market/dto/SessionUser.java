@@ -2,6 +2,7 @@ package com.shop.market.dto;
 
 import java.io.Serializable;
 import lombok.Getter;
+import lombok.ToString;
 
 @Getter
 public class SessionUser implements Serializable {

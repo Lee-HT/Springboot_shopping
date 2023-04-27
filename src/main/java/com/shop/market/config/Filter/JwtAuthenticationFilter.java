@@ -2,6 +2,7 @@ package com.shop.market.config.Filter;
 
 import com.shop.market.config.Oauth.LoginUser;
 import com.shop.market.config.jwt.TokenProvider;
+import com.shop.market.dto.SessionUser;
 import com.shop.market.dto.userD;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -20,16 +21,26 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
+    private final HttpSession httpSession;
     private final TokenProvider tokenProvider;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
             FilterChain filterChain) throws ServletException, IOException {
         String token = tokenProvider.resolveToken(request);
+        log.info("token : " + token);
+        SessionUser userInfo = (SessionUser) httpSession.getAttribute("user");
+
+        if (userInfo != null){
+            log.info("username : " + userInfo.getUsername());
+        }else {
+            log.info("userInfo == null");
+        }
 
         if(token != null && tokenProvider.validationToken(token)){
             try{
                 Authentication authentication = tokenProvider.getAuthentication(token);
+                log.info(authentication.toString());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }catch(Exception e){
                 log.error("사용자 없음 " + e);
@@ -37,6 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         }
 
+        log.info("jwt filter");
         filterChain.doFilter(request,response);
     }
 }

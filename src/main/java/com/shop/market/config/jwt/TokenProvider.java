@@ -3,6 +3,7 @@ package com.shop.market.config.jwt;
 import com.shop.market.dto.userD;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -56,11 +57,13 @@ public class TokenProvider {
         claims.put("role","ROLE_USER");
 
         // jwt 생성
-        return Jwts.builder()
+        String JwtToken = Jwts.builder()
                 .setHeader(headers)
                 .setClaims(claims)
                 .signWith(key,SignatureAlgorithm.HS512)
                 .compact();
+        log.info(JwtToken);
+        return JwtToken;
     }
 
     //REFRESH TOKEN 발급

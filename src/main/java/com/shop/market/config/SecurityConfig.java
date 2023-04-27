@@ -3,6 +3,7 @@ package com.shop.market.config;
 import com.shop.market.config.Filter.JwtAuthenticationFilter;
 import com.shop.market.config.Oauth.OAuth2Service;
 import com.shop.market.config.jwt.TokenProvider;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -24,6 +25,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private final OAuth2Service oAuth2Service;
     private final TokenProvider tokenProvider;
+    private final HttpSession httpSession;
 
     @Bean
     public PasswordEncoder PasswordEncoder() {
@@ -51,14 +53,17 @@ public class SecurityConfig {
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(new JwtAuthenticationFilter(tokenProvider),
+        http.addFilterBefore(new JwtAuthenticationFilter(httpSession,tokenProvider),
                 UsernamePasswordAuthenticationFilter.class);
 
         http.authorizeHttpRequests(auth -> auth
-                // 정적 자원 접근 허용
-                .requestMatchers("/", "/login/**", "/item/**", "/post/**", "/jpa/**", "/home/**")
+                .requestMatchers("/","/login/**")
                 .permitAll()
-                .requestMatchers("/postProcess/savePost").hasRole("USER")
+                .requestMatchers("/item/**", "/post/**", "/jpa/**", "/home/**")
+                .hasRole("USER")
+                .requestMatchers("/itemProcess/updateItem")
+                .hasAnyRole("ADMIN","MANAGER")
+                .requestMatchers("/jwt/**").permitAll()
                 .anyRequest().authenticated()
         );
 

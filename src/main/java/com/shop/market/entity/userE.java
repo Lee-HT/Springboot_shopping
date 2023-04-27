@@ -27,8 +27,7 @@ public class userE extends BaseTimeE{
     @Column(length = 30)
     private String provider;
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String role;
     @Column(length = 15)
     private String nickname;
 
