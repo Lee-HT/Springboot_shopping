@@ -1,9 +1,7 @@
 package com.shop.market.config.Filter;
 
-import com.shop.market.config.Oauth.LoginUser;
 import com.shop.market.config.jwt.TokenProvider;
 import com.shop.market.dto.SessionUser;
-import com.shop.market.dto.userD;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,7 +19,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-    private final HttpSession httpSession;
     private final TokenProvider tokenProvider;
 
     @Override
@@ -29,13 +26,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain) throws ServletException, IOException {
         String token = tokenProvider.resolveToken(request);
         log.info("token : " + token);
-        SessionUser userInfo = (SessionUser) httpSession.getAttribute("user");
-
-        if (userInfo != null){
-            log.info("username : " + userInfo.getUsername());
-        }else {
-            log.info("userInfo == null");
-        }
 
         if(token != null && tokenProvider.validationToken(token)){
             try{

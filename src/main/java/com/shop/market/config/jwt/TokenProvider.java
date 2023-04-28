@@ -25,10 +25,12 @@ public class TokenProvider {
     private static final String AuthorizationHeader = "Authorization";
     private final long ACCESS_TOKEN_EXPIRE_LENGTH;
     private final long REFRESH_TOKEN_EXPIRE_LENGTH;
+    private final String tokenType;
     private final Key key;
 
     public TokenProvider() {
         this.key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+        this.tokenType = "Bearer ";
         this.ACCESS_TOKEN_EXPIRE_LENGTH = JwtProperties.accessTime;
         this.REFRESH_TOKEN_EXPIRE_LENGTH = JwtProperties.refreshTime;
     }
@@ -38,7 +40,7 @@ public class TokenProvider {
     }
 
     //ACCESS TOKEN 발급
-    public String CreateToken(userD user){
+    public String CreateToken(String username){
         // 현재 시간
         Date now = new Date();
         // 만료 시간
@@ -51,7 +53,7 @@ public class TokenProvider {
 
         // payload key:value 지정 (Claim 들)
         Claims claims = Jwts.claims()
-                .setSubject(user.getUsername())
+                .setSubject(username)
                 .setIssuedAt(now)
                 .setExpiration(expire);
         claims.put("role","ROLE_USER");
@@ -62,7 +64,9 @@ public class TokenProvider {
                 .setClaims(claims)
                 .signWith(key,SignatureAlgorithm.HS512)
                 .compact();
-        log.info(JwtToken);
+        JwtToken = tokenType + JwtToken;
+        log.info(String.format("createToken : %s",JwtToken));
+
         return JwtToken;
     }
 
@@ -71,18 +75,25 @@ public class TokenProvider {
         Date now = new Date();
         Date expire = expireTime(now,REFRESH_TOKEN_EXPIRE_LENGTH);
 
-        return Jwts.builder()
+        String JwtToken = Jwts.builder()
                 .setExpiration(expire)
                 .signWith(key)
                 .compact();
+        JwtToken = tokenType + JwtToken;
+        log.info(String.format("refreshToken : %s",JwtToken));
+        return JwtToken;
     }
 
     // 권한 인증
     public Authentication getAuthentication(String token) {
-        // payload parse 하여 string 변환
-        String role = Jwts.parserBuilder()
-                .setSigningKey(key)
-                .build().parseClaimsJws(token).getBody().get("role").toString();
+        // payload parse 하여 claim 반환
+        Claims claims = Jwts.parserBuilder().setSigningKey(key)
+                .build().parseClaimsJws(token).getBody();
+        String role = claims.get("role").toString();
+        String username = claims.getSubject();
+
+        log.info(String.format("getAuthentication role : %s",role));
+        log.info(String.format("getAuthentication username : %s",username));
 
         // 권한 부여
 //        Collection<? extends GrantedAuthority> authorities =
@@ -113,7 +124,7 @@ public class TokenProvider {
     // HEADER 에서 TOKEN 가져옴
     public String resolveToken(HttpServletRequest request){
         String bearerToken = request.getHeader(AuthorizationHeader);
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")){
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(tokenType)){
             return bearerToken.substring(7);
         }
         return null;

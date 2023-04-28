@@ -15,7 +15,7 @@ public class HomeController {
     @ResponseBody
     public String home(){
         String testResult = Role.USER.getValue();
-        log.info(testResult);
+        log.info(String.format("test Result : %s",testResult));
         return testResult;
     }
 }

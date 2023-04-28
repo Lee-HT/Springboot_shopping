@@ -2,6 +2,7 @@ package com.shop.market.config.Oauth;
 
 import com.shop.market.dto.userD;
 import com.shop.market.enums.Role;
+import java.util.HashMap;
 import java.util.Map;
 import lombok.Builder;
 import lombok.Getter;

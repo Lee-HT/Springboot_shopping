@@ -1,8 +1,11 @@
 package com.shop.market.config.jwt;
 
+import com.shop.market.enums.Role;
 import java.util.Collection;
+import java.util.Collections;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 public class JwtAuthentication implements Authentication {
     private String role;
@@ -13,7 +16,7 @@ public class JwtAuthentication implements Authentication {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return Collections.singleton(new SimpleGrantedAuthority(role));
     }
 
     @Override

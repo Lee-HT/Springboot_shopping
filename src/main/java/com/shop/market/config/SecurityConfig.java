@@ -2,8 +2,8 @@ package com.shop.market.config;
 
 import com.shop.market.config.Filter.JwtAuthenticationFilter;
 import com.shop.market.config.Oauth.OAuth2Service;
+import com.shop.market.config.Oauth.Oauth2SuccessHandler;
 import com.shop.market.config.jwt.TokenProvider;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -24,8 +24,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Slf4j
 public class SecurityConfig {
     private final OAuth2Service oAuth2Service;
+    private final Oauth2SuccessHandler oauth2SuccessHandler;
     private final TokenProvider tokenProvider;
-    private final HttpSession httpSession;
 
     @Bean
     public PasswordEncoder PasswordEncoder() {
@@ -50,10 +50,10 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/");
 
         // 세션 생성 x, 기존 세션 사용 x (jwt 사용시)
-        http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//        http.sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(new JwtAuthenticationFilter(httpSession,tokenProvider),
+        http.addFilterBefore(new JwtAuthenticationFilter(tokenProvider),
                 UsernamePasswordAuthenticationFilter.class);
 
         http.authorizeHttpRequests(auth -> auth
@@ -71,7 +71,7 @@ public class SecurityConfig {
 
         http.oauth2Login()
                 .loginPage("/login/login")
-                .defaultSuccessUrl("/")
+                .successHandler(oauth2SuccessHandler)
                 .userInfoEndpoint()
                 .userService(oAuth2Service);
 
