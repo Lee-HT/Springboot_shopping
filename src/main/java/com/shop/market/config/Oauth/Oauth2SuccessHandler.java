@@ -18,8 +18,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
-    private HttpSession httpSession;
-    private TokenProvider tokenProvider;
+    private final HttpSession httpSession;
+    private final TokenProvider tokenProvider;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -28,6 +28,8 @@ public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
         log.info(httpSession.getAttribute("user").toString());
 
         String token = tokenProvider.CreateToken(sessionUser.getUsername());
+
+        response.setHeader("Authorization",token);
 
     }
 }
