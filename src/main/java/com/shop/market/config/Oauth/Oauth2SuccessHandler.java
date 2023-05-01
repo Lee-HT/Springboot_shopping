@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -30,6 +32,11 @@ public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
         String token = tokenProvider.CreateToken(sessionUser.getUsername());
 
         response.setHeader("Authorization",token);
+
+        String targetURl = UriComponentsBuilder.fromUriString("/home/test").queryParam("token",token)
+                        .build().toUriString();
+
+        getRedirectStrategy().sendRedirect(request,response,targetURl);
 
     }
 }

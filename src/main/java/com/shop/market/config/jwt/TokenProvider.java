@@ -53,13 +53,13 @@ public class TokenProvider {
 
         // payload key:value 지정 (Claim 들)
         Claims claims = Jwts.claims()
-                .setSubject(username)
                 .setIssuedAt(now)
                 .setExpiration(expire);
         claims.put("role","ROLE_USER");
 
         // jwt 생성
         String JwtToken = Jwts.builder()
+                .setSubject(username)
                 .setHeader(headers)
                 .setClaims(claims)
                 .signWith(key,SignatureAlgorithm.HS512)
@@ -75,8 +75,12 @@ public class TokenProvider {
         Date now = new Date();
         Date expire = expireTime(now,REFRESH_TOKEN_EXPIRE_LENGTH);
 
+        Claims claims = Jwts.claims()
+                .setIssuedAt(now)
+                .setExpiration(expire);
+
         String JwtToken = Jwts.builder()
-                .setExpiration(expire)
+                .setClaims(claims)
                 .signWith(key)
                 .compact();
         JwtToken = tokenType + JwtToken;
@@ -108,7 +112,7 @@ public class TokenProvider {
             // token 에서 claim 추출
             Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
             // 만료시간 확인
-            return !claims.getExpiration().before(new Date());
+            return claims.getExpiration().after(new Date());
         }catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e){
             log.info("잘못된 JWT 서명입니다.");
         }catch (ExpiredJwtException e){
