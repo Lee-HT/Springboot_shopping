@@ -19,7 +19,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
+public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+
     private final HttpSession httpSession;
     private final TokenProvider tokenProvider;
 
@@ -29,14 +30,16 @@ public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
         SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
         log.info(httpSession.getAttribute("user").toString());
 
-        String token = tokenProvider.CreateToken(sessionUser.getUsername());
+        String username = sessionUser.getUsername();
+        String token = tokenProvider.CreateToken(username);
 
-        response.setHeader("Authorization",token);
+        response.setHeader("Authorization", token);
 
-        String targetURl = UriComponentsBuilder.fromUriString("/home/test").queryParam("token",token)
-                        .build().toUriString();
+        String targetURl = UriComponentsBuilder.fromUriString("/")
+//                .queryParam("", "")
+                .build().toUriString();
 
-        getRedirectStrategy().sendRedirect(request,response,targetURl);
+        getRedirectStrategy().sendRedirect(request, response, targetURl);
 
     }
 }

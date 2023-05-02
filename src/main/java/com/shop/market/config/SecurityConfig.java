@@ -50,8 +50,8 @@ public class SecurityConfig {
                 .logoutSuccessUrl("/");
 
         // 세션 생성 x, 기존 세션 사용 x (jwt 사용시)
-//        http.sessionManagement()
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http.addFilterBefore(new JwtAuthenticationFilter(tokenProvider),
                 UsernamePasswordAuthenticationFilter.class);
