@@ -59,9 +59,9 @@ public class TokenProvider {
 
         // jwt 생성
         String JwtToken = Jwts.builder()
-                .setSubject(username)
                 .setHeader(headers)
                 .setClaims(claims)
+                .setSubject(username) // setClaims 후에 배치
                 .signWith(key,SignatureAlgorithm.HS512)
                 .compact();
         JwtToken = tokenType + JwtToken;

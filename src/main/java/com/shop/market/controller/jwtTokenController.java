@@ -24,7 +24,7 @@ public class jwtTokenController {
     private final TokenProvider tokenProvider;
     @GetMapping("token")
     @ResponseBody
-    public ResponseEntity<String> jwtToken(@RequestBody String username){
+    public ResponseEntity<String> jwtToken(String username){
         log.info("jwtToken Controller");
         log.info("username : {}",username);
         String token = tokenProvider.CreateToken(username);

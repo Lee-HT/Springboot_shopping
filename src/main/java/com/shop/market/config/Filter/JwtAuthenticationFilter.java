@@ -30,8 +30,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if(token != null && tokenProvider.validationToken(token)){
             try{
                 Authentication authentication = tokenProvider.getAuthentication(token);
-                log.info(authentication.toString());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+                log.info("setContext authentication");
             }catch(Exception e){
                 log.error("사용자 없음 " + e);
             }
