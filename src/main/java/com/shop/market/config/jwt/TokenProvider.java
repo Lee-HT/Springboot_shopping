@@ -1,6 +1,7 @@
 package com.shop.market.config.jwt;
 
 import com.shop.market.dto.userD;
+import com.shop.market.enums.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwt;
@@ -11,11 +12,14 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import java.security.Key;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -100,9 +104,9 @@ public class TokenProvider {
         log.info(String.format("getAuthentication username : %s",username));
 
         // 권한 부여
-//        Collection<? extends GrantedAuthority> authorities =
-//                Collections.singleton(new SimpleGrantedAuthority(user.getRole()));
-        return new JwtAuthentication(role);
+
+        return new UsernamePasswordAuthenticationToken("username",null,
+                Collections.singleton(new SimpleGrantedAuthority(role)));
     }
 
     // TOKEN 확인

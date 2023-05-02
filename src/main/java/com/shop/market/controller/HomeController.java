@@ -15,6 +15,7 @@ public class HomeController {
     @GetMapping("test")
     @ResponseBody
     public String home(@RequestParam String token){
+        log.info("HomeController");
         log.info(String.format("Token : %s",token));
         return token;
     }

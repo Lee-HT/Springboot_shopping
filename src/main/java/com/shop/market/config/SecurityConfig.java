@@ -67,8 +67,6 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
         );
 
-        log.info("before oauth");
-
         http.oauth2Login()
                 .loginPage("/login/login")
                 .successHandler(oauth2SuccessHandler)
