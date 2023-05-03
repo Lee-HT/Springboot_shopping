@@ -9,19 +9,33 @@
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <link rel="stylesheet"
         href="/css/default_style.css">
+  <link rel="stylesheet"
+        href="/css/header_style.css">
 </head>
 <body>
 <header class="header">
   <nav>
-    <h1 class="ht">메뉴</h1>
-    <ul class="hul">
-      <h4 class="menu">
-        <li><a href="/">홈</a></li>
-        <li><a href="/login/login">로그인</a></li>
-        <li><a href="/post/savePost">판매 등록</a></li>
-        <li><a href="/item/search">검색</a></li>
-        <li><a href="#">구매</a></li>
-      </h4>
+    <h1 class="title">
+      <li><a href="/">메뉴</a></li>
+    </h1>
+    <ul class="menu">
+      <li>
+        <a href="/login/login">로그인</a>
+      </li>
+      <li>
+        <a href="/post/savePost">판매 등록</a>
+      </li>
+      <li>
+        <a href="/item/search">물품 검색</a>
+      </li>
+      <li>
+        <a href="/myPage/userinfo">마이 페이지</a>
+        <ul class="sub">
+          <li><a href="/myPage/userinfo">유저 정보</a></li>
+          <li><a href="/myPage/myPost">판매 글</a></li>
+          <li><a href="/myPage">마이 페이지</a></li>
+        </ul>
+      </li>
     </ul>
   </nav>
 </header>

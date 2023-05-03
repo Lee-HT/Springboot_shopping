@@ -1,0 +1,48 @@
+body {
+background-color :#F0F0F0;
+}
+
+ul{
+list-style: none;
+}
+
+.header {
+height:120px; background-color:#33FF99; border: 1px solid #253342;
+position:fixed; width: 90%; z-index:9999; top:0; left:5%; right:5%;
+}
+
+.title {
+list-style: none;
+color:blue; line-height:50px; float:left;
+}
+
+.menu {
+color:blue; px:50px; float:right;
+}
+
+.menu:hover .dropdown-content {
+display: block;
+}
+
+.menu li{
+position: relative;
+float:left; margin-right:30px;
+}
+
+.menu li a{
+display: block; padding:0 15px;
+background-color: #333333;
+height: 30px; line-height: 30px;
+color: #0ff;
+}
+
+.menu sub{
+display: block; position: absolute;
+background-color: #F9F9F9;
+text-align: center;
+}
+
+.menu sub a{
+display: block; padding: 5px;
+background: #666; color: #fff;
+}

@@ -1,44 +1,29 @@
-.header {
-height:120px; background-color:#33FF99; border: 1px solid #253342;
-position:fixed; width: 90%; z-index:9999; top:0; left:5%; right:5%;
-}
-
-body {
-background-color:#F0F0F0;
+a {
+text-decoration: none;
 }
 
 .container{
 padding-top:120px;
 }
 
-.ht {
-color:blue; line-height:50px; float:left;
+ul{
+list-style: none;
 }
 
-.menu {
-color:blue; px:50px; float:right;
+.login {
+float:right;
 }
 
-.menu li{
-float:left; margin-right:30px;
+.left {
+float:left;
 }
 
-.hul{
-list-style:none;
+.right {
+float:right;
 }
 
-.ul search{
-margin-left:30px; px:2em;
-}
-
-.login{
-float:right
-}
-
-.left{
-float:left
-}
-
-.right{
-float:right
+.loginImage {
+width: 160px;
+height: 40px;
+object-fit: fill;
 }
