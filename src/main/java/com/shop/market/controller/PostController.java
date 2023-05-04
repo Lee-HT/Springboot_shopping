@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("postProcess/")
 public class PostController {
-
     @Autowired
     private PostService postService;
 

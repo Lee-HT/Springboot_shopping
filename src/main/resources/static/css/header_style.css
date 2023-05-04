@@ -12,27 +12,38 @@ height:120px; background-color:#33FF99; border: 1px solid #253342;
 position:fixed; width: 90%; z-index:9999; top:0; left:5%; right:5%;
 }
 
+.loginImage {
+padding: 0px; margin: 0px;
+width: 160px; height: 40px;
+object-fit: fill;
+}
+
 .title {
 list-style: none;
 color:blue; line-height:50px; float:left;
 }
 
+.oauth2 li{
+height: 40px; line-height: 30px;
+}
+
 .menu {
-color:blue; px:50px; float:right;
+px:50px; float:right;
+margin-right: 30px;
 }
 
 .menu li {
 position: relative;
-width: 120px; padding: 5px;
-float:left; margin-right:10px;
+width: 140px; padding: 0px;
+float: left; margin-right: 5px;
 text-align: center;
 }
 
 .menu li a {
-display: block; padding: 0px 10px;
-background-color: #333333;
+display: block; padding: 0px 5px;
 height: 30px; line-height: 30px;
-color: #00FFFF;
+font-size: 20px;
+color: #226666;
 }
 
 .menu .sub {
@@ -40,9 +51,10 @@ display: none; position: absolute;
 }
 
 .menu .sub li{
-display: block; padding: 5px;
-background-color: #33BB88;
+display: block; padding: 0px;
+width: 140px; height: 40px;
 text-align: center;
+font-size: 16px;
 line-height: 10px;
 }
 
