@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @Controller
-@RequestMapping("itemProcess/")
+@RequestMapping("item")
 public class ItemController {
     private ItemService itemService;
 
@@ -27,15 +28,15 @@ public class ItemController {
         this.itemService = itemService;
     }
 
-    @GetMapping("searchItem")
+    @GetMapping("")
     @ResponseBody
-    public List<itemD> searchItem(@RequestParam String itemName){
+    public List<itemD> selectItem(@RequestParam String itemName){
         log.info("itemController searchItem");
         log.info(itemName);
         return itemService.searchByItemName(itemName);
     }
 
-    @GetMapping("newItem")
+    @PostMapping("")
     @ResponseBody
     public itemD insertItem(@RequestBody itemD item){
         log.info("itemController insertItem");
@@ -45,7 +46,7 @@ public class ItemController {
         return item;
     }
 
-    @DeleteMapping("deleteItem")
+    @DeleteMapping("")
     public String deleteItem(@RequestBody HashMap<String,Long> deleteMap){
         log.info("itemController deleteItem");
         Long id = deleteMap.get("id");
@@ -53,7 +54,7 @@ public class ItemController {
         return "redirect:/";
     }
 
-    @PatchMapping("updateItem")
+    @PatchMapping("")
     @ResponseBody
     public itemD updateItem(@RequestBody Map<String,Object> item){
         log.info("itemController updateItem");

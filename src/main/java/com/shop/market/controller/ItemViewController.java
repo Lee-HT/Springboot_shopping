@@ -9,19 +9,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
-@RequestMapping("item/")
+@RequestMapping("itemV")
 public class ItemViewController {
 
     @Autowired
     public ItemService itemService;
 
-    @GetMapping("search")
-    public String SearchItemView(@RequestParam(defaultValue = "") String searchText, Model model) {
+    @GetMapping("")
+    public String SearchItem(@RequestParam(defaultValue = "") String searchText, Model model) {
         log.info("itemView search");
         List<itemD> searchList = null;
         log.info("searchText : " + searchText);
@@ -38,8 +40,8 @@ public class ItemViewController {
         return "item/searchItem";
     }
 
-    @GetMapping("update")
-    public String updateItemView(
+    @GetMapping("updatePage")
+    public String updateItem(
             @RequestParam(required = false) Map<String,Object> item, Model model) {
         model.addAttribute("itemName", item.get("itemName"));
         model.addAttribute("itemPrice", item.get("itemPrice"));
