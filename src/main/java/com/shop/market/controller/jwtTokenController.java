@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @Controller
-@RequestMapping("jwt/")
+@RequestMapping("jwt")
 @RequiredArgsConstructor
 public class jwtTokenController {
     private final TokenProvider tokenProvider;
-    @GetMapping("token")
+    @GetMapping("/token")
     @ResponseBody
     public ResponseEntity<String> jwtToken(String username){
         log.info("jwtToken Controller");

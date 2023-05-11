@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @Slf4j
-@RequestMapping("login/")
+@RequestMapping("login")
 public class LoginViewController {
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String loginMenu(Model model,@LoginUser SessionUser user) {
         log.info("LoginView login");
         if(user != null){
@@ -23,12 +23,12 @@ public class LoginViewController {
         return "user/login";
     }
 
-    @GetMapping("register")
+    @GetMapping("/register")
     public String registerMenu() {
         return "user/register";
     }
 
-    @GetMapping("savePost")
+    @GetMapping("/savePost")
     public String savePostMenu() {
         return "user/savePost";
     }

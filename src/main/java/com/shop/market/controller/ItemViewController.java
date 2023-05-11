@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner.Mode;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class ItemViewController {
     @Autowired
     public ItemService itemService;
 
-    @GetMapping("")
+    @GetMapping("/search")
     public String SearchItem(@RequestParam(defaultValue = "") String searchText, Model model) {
         log.info("itemView search");
         List<itemD> searchList = null;
@@ -40,7 +41,17 @@ public class ItemViewController {
         return "item/searchItem";
     }
 
-    @GetMapping("updatePage")
+    @GetMapping("/detail")
+    public String ItemDetail(@RequestParam(defaultValue = "") String itemName, Model model){
+        log.info("itemView detail");
+        if(!(itemName == null || itemName.equals(""))){
+
+        }
+
+        return "item/itemDetail";
+    }
+
+    @GetMapping("/modify")
     public String updateItem(
             @RequestParam(required = false) Map<String,Object> item, Model model) {
         model.addAttribute("itemName", item.get("itemName"));

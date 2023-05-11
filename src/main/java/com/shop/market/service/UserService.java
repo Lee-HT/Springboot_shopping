@@ -8,16 +8,12 @@ import java.util.Map;
 
 public interface UserService {
 
-    List<userD> findUserAll();
-
     userD findByEmail(String email);
 
-    void register(userD user);
-
-    void unregister(String username);
-
-    userD findUser(loginD login);
-
-    void updateUser(userD user);
+//    List<userD> findUserAll();
+//    void register(userD user);
+//    void unregister(String username);
+//    userD findUser(loginD login);
+//    void updateUser(userD user);
 
 }

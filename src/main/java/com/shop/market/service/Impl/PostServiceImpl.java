@@ -25,18 +25,6 @@ public class PostServiceImpl implements PostService {
     };
 
     @Override
-    public List<postD> postAll(){
-        log.info("postService selectAll");
-        return postMapper.selectPostAll();
-    }
-
-    @Override
-    public postD selectPostById(Long id){
-        log.info("postService selectPostById");
-        return postMapper.selectPostById(id);
-    }
-
-    @Override
     public List<postD> sellerPost(String seller){
         try{
             log.info("sellerPostService");
@@ -63,4 +51,18 @@ public class PostServiceImpl implements PostService {
             return null;
         }
     }
+
+    // select All
+//    @Override
+//    public List<postD> selectAll(){
+//        log.info("postService selectAll");
+//        return postMapper.selectPostAll();
+//    }
+
+    // select by Id
+//    @Override
+//    public postD selectPostById(Long id){
+//        log.info("postService selectPostById");
+//        return postMapper.selectPostById(id);
+//    }
 }

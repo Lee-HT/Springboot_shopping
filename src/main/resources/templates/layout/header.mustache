@@ -8,7 +8,7 @@
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
   <link rel="stylesheet"
-        href="/css/default_style.css">
+        href="/css/main_style.css">
   <link rel="stylesheet"
         href="/css/header_style.css">
 </head>
@@ -20,18 +20,18 @@
     </h1>
     <ul class="menu">
       <li>
-        <a href="/post/savePost">판매 등록</a>
+        <a href="/post/save" methods="get">판매 등록</a>
       </li>
       <li>
-        <a href="/itemV">물품 검색</a>
+        <a href="/itemV/search">물품 검색</a>
         <ul class="sub submenu">
-          <li><a href="/itemV" methods="post">물품 수정</a></li>
+          <li><a href="/itemV/modify">물품 수정</a></li>
           <li><a href="#">카테고리 2</a></li>
         </ul>
       </li>
       {{^username}}
-        <li class="oauth2">
-          {{>layout/oauth2}}
+        <li>
+          <a href="/login">로그인</a>
         </li>
       {{/username}}
       {{#username}}

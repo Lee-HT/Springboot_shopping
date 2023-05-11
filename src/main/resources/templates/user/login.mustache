@@ -2,35 +2,23 @@
 <h1>
   로그인 화면
 </h1>
-<div class="col-md-12">
-  <div class="login">
-    {{#username}}
-      <h5>login as {{username}}</h5>
+{{#username}}
+  <div class=user">
+    <h5>login as {{username}}</h5>
+  </div>
+{{/username}}
+<div class="loginForm">
+  <h2>
+    {{^username}}
+      {{>layout/oauth2}}
     {{/username}}
-  </div>
-  <div class="col-md-3">
-    <form action="/loginProcess/login" method="post">
-      <div class="form-group">
-        <label>아이디</label>
-        <input type="text" class="form-control" id="username" placeholder="ID">
-      </div>
-      <div class="form-group">
-        <label>비밀번호</label>
-        <input type="text" class="form-control" id="password" placeholder="PASSWORD">
-      </div>
-    </form>
-  </div>
-  <div class="col-md-6">
-    <h2>
-      <div class="row">
-        {{>layout/oauth2}}
-        {{>layout/logout}}
-      </div>
-      <br>
-      <div class="row">
-        <a href="/login/register">회원가입</a>
-      </div>
-    </h2>
-  </div>
+    {{#username}}
+      {{>layout/logout}}
+    {{/username}}
+    <br>
+    <div class="row">
+      <a href="/login/register">회원가입</a>
+    </div>
+  </h2>
 </div>
 {{>layout/footer}}

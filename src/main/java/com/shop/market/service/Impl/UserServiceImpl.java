@@ -28,11 +28,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<userD> findUserAll(){
-        return userMapper.selectUserAll();
-    }
-
-    @Override
     public userD findByEmail(String email) {
         log.info("UserService findEmailProvider");
         userD user = userMapper.findByEmail(email);
@@ -45,32 +40,42 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Override
-    public void register(userD user){
-        log.info("UserService register");
-        userMapper.saveUser(userD.builder().username(user.getUsername())
-                .password(user.getPassword())
-                .email(user.getEmail())
-                .role(Role.USER.getValue()).build());
-    }
+    // find user all
+//    @Override
+//    public List<userD> findUserAll(){
+//        return userMapper.selectUserAll();
+//    }
 
-    @Override
-    public void unregister(String username){
-        log.info("UserService unregister");
-        userMapper.deleteUser(username);
-    }
+    // user data create
+//    @Override
+//    public void register(userD user){
+//        log.info("UserService register");
+//        userMapper.saveUser(userD.builder().username(user.getUsername())
+//                .password(user.getPassword())
+//                .email(user.getEmail())
+//                .role(Role.USER.getValue()).build());
+//    }
 
-    @Override
-    public userD findUser(loginD login){
-        log.info("UserService findUser");
-        userD user = userMapper.findByUsername(login.getUsername());
+    // user data delete
+//    @Override
+//    public void unregister(String username){
+//        log.info("UserService unregister");
+//        userMapper.deleteUser(username);
+//    }
 
-        return user;
-    }
+    // find by username
+//    @Override
+//    public userD findUser(loginD login){
+//        log.info("UserService findUser");
+//        userD user = userMapper.findByUsername(login.getUsername());
+//
+//        return user;
+//    }
 
-    @Override
-    public void updateUser(userD user){
-        log.info("UserService updateUser");
-        userMapper.updateUser(user);
-    }
+    // user data update
+//    @Override
+//    public void updateUser(userD user){
+//        log.info("UserService updateUser");
+//        userMapper.updateUser(user);
+//    }
 }

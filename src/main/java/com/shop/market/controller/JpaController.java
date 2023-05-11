@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping("jpa/")
+@RequestMapping("jpa")
 @RequiredArgsConstructor
 @Slf4j
 public class JpaController {
     private final UserRepository userRepository;
 
-    @GetMapping("findTest")
+    @GetMapping("/findTest")
     @ResponseBody
     public List<userE> selectTest(){
         log.info("findTest");

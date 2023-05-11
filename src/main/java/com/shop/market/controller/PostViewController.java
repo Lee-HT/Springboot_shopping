@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Controller
-@RequestMapping("post/")
+@RequestMapping("postV")
 public class PostViewController {
 
     @Autowired
     private PostService postService;
 
-    @GetMapping("savePost")
+    @GetMapping("/save")
     public String savePost() {
         return "post/savePost";
     }
 
-    @GetMapping("sellerPost")
+    @GetMapping("")
     public String sellerPost(Model model, @RequestParam String seller) {
         log.info("PostViewController sellerPost");
         try{
@@ -41,7 +41,7 @@ public class PostViewController {
         return "post/sellerPost";
     }
 
-    @GetMapping("searchItem")
+    @GetMapping("/search")
     public String itemSell(@RequestParam String name){
         return "post/searchItem";
     }

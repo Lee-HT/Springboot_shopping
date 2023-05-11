@@ -10,7 +10,7 @@ ul{
 list-style: none;
 }
 
-.login {
+.user {
 float:right;
 }
 
@@ -20,4 +20,15 @@ float:left;
 
 .right {
 float:right;
+}
+
+.loginImage {
+margin: auto;
+width: 160px; height: 40px;
+object-fit: fill;
+}
+
+.loginForm {
+width: 500px; height: 300px;
+margin: 0 auto;
 }

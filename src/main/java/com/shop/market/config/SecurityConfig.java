@@ -6,12 +6,15 @@ import com.shop.market.config.Oauth.Oauth2SuccessHandler;
 import com.shop.market.config.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.el.parser.Token;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -53,8 +56,10 @@ public class SecurityConfig {
 //        http.sessionManagement()
 //                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(new JwtAuthenticationFilter(tokenProvider),
-                UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(new JwtAuthenticationFilter(tokenProvider),
+//                UsernamePasswordAuthenticationFilter.class);
+
+        http.apply(new MycustomDsl(tokenProvider));
 
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers("/","/login/**")
@@ -74,5 +79,18 @@ public class SecurityConfig {
                 .userService(oAuth2Service);
 
         return http.build();
+    }
+
+    public class MycustomDsl extends AbstractHttpConfigurer<MycustomDsl, HttpSecurity> {
+        private TokenProvider tokenProvider;
+
+        public MycustomDsl(TokenProvider tokenProvider){
+            this.tokenProvider = tokenProvider;
+        }
+
+        @Override
+        public void configure(HttpSecurity http) throws Exception{
+            http.addFilterBefore(new JwtAuthenticationFilter(tokenProvider),UsernamePasswordAuthenticationFilter.class);
+        }
     }
 }

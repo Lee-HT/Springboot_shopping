@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,12 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @Controller
-@RequestMapping("postProcess/")
+@RequestMapping("post")
 public class PostController {
     @Autowired
     private PostService postService;
 
-    @PostMapping("savePost")
+    @PostMapping("")
     public @ResponseBody postD savePost(postD post) {
         log.info("postController savePost");
         log.info(post.getSeller());
@@ -36,7 +37,7 @@ public class PostController {
         }
     }
 
-    @PostMapping("sellerPost")
+    @GetMapping("")
     public @ResponseBody List<postD> sellerPost(@RequestParam String seller){
         log.info("postController selectPost");
         List<postD> postList = postService.sellerPost(seller);
@@ -46,7 +47,7 @@ public class PostController {
         return postList;
     }
 
-    @DeleteMapping("deletePost")
+    @DeleteMapping("")
     public @ResponseBody postD deletePost(@RequestBody HashMap<String,Long> id){
         log.info("postController deletePost");
         return postService.deletePost(id.get("id"));

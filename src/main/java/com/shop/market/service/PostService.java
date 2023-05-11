@@ -6,12 +6,9 @@ import java.util.List;
 public interface PostService {
 
     void savePost(postD post);
-
-    List<postD> postAll();
-
-    postD selectPostById(Long id);
-
+    List<postD> sellerPost(String seller);
     postD deletePost(Long id);
 
-    List<postD> sellerPost(String seller);
+//    List<postD> selectAll();
+//    postD selectPostById(Long id);
 }
