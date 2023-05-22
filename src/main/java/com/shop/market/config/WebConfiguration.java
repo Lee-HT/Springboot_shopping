@@ -4,8 +4,10 @@ import com.shop.market.config.Oauth.LoginUserArgumentResolver;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.web.servlet.view.MustacheViewResolver;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -29,4 +31,17 @@ public class WebConfiguration implements WebMvcConfigurer {
     public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers){
         argumentResolvers.add(loginUserArgumentResolver);
     }
+
+//    @Bean
+//    public WebMvcConfigurer corsConfigurer(){
+//        return new WebMvcConfigurer(){
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry){
+//                registry.addMapping("/**")
+//                        .allowedOrigins("http://localhost:6040")
+//                        .allowedMethods("GET","POST","PUT","DELETE","PATCH")
+//                        .maxAge(3000);
+//            }
+//        };
+//    }
 }

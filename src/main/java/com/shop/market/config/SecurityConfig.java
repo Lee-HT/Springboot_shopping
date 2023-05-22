@@ -44,7 +44,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors().disable();
+//        http.cors().disable();
         http.csrf().disable();
         http.httpBasic().disable();
         http.formLogin().disable();
@@ -83,7 +83,6 @@ public class SecurityConfig {
 
     public class MycustomDsl extends AbstractHttpConfigurer<MycustomDsl, HttpSecurity> {
         private TokenProvider tokenProvider;
-
         public MycustomDsl(TokenProvider tokenProvider){
             this.tokenProvider = tokenProvider;
         }
