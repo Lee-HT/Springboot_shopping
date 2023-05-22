@@ -1,10 +1,7 @@
 package com.shop.market.config.jwt;
 
-import com.shop.market.dto.userD;
-import com.shop.market.enums.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -44,7 +41,7 @@ public class TokenProvider {
     }
 
     //ACCESS TOKEN 발급
-    public String CreateToken(String username){
+    public String AccessToken(String username){
         // 현재 시간
         Date now = new Date();
         // 만료 시간
@@ -68,6 +65,7 @@ public class TokenProvider {
                 .setSubject(username) // setClaims 후에 배치
                 .signWith(key,SignatureAlgorithm.HS512)
                 .compact();
+
         JwtToken = tokenType + JwtToken;
         log.info(String.format("createToken : %s",JwtToken));
 
@@ -79,14 +77,22 @@ public class TokenProvider {
         Date now = new Date();
         Date expire = expireTime(now,REFRESH_TOKEN_EXPIRE_LENGTH);
 
+        // Header 지정
+        Map<String,Object> headers = new HashMap<>();
+        headers.put("typ","JWT");
+        headers.put("alg","HS512");
+
         Claims claims = Jwts.claims()
                 .setIssuedAt(now)
                 .setExpiration(expire);
+        claims.put("role","ROLE_USER");
 
         String JwtToken = Jwts.builder()
+                .setHeader(headers)
                 .setClaims(claims)
                 .signWith(key)
                 .compact();
+
         JwtToken = tokenType + JwtToken;
         log.info(String.format("refreshToken : %s",JwtToken));
         return JwtToken;
@@ -104,7 +110,6 @@ public class TokenProvider {
         log.info(String.format("getAuthentication username : %s",username));
 
         // 권한 부여
-
         return new UsernamePasswordAuthenticationToken("username",null,
                 Collections.singleton(new SimpleGrantedAuthority(role)));
     }

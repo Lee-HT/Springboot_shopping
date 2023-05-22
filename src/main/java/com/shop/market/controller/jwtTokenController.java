@@ -27,7 +27,7 @@ public class jwtTokenController {
     public ResponseEntity<String> jwtToken(String username){
         log.info("jwtToken Controller");
         log.info("username : {}",username);
-        String token = tokenProvider.CreateToken(username);
+        String token = tokenProvider.AccessToken(username);
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization",token);
