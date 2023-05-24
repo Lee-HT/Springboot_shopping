@@ -2,6 +2,7 @@ package com.shop.market.config;
 
 import com.shop.market.config.Filter.JwtAuthenticationFilter;
 import com.shop.market.config.Oauth.CookieProvider;
+import com.shop.market.config.Oauth.LogoutSuccessHandler;
 import com.shop.market.config.Oauth.OAuth2Service;
 import com.shop.market.config.Oauth.Oauth2SuccessHandler;
 import com.shop.market.config.jwt.TokenProvider;
@@ -27,6 +28,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private final OAuth2Service oAuth2Service;
     private final Oauth2SuccessHandler oauth2SuccessHandler;
+    private final LogoutSuccessHandler logoutSuccessHandler;
     private final TokenProvider tokenProvider;
     private final CookieProvider cookieProvider;
 
@@ -50,6 +52,7 @@ public class SecurityConfig {
         http.formLogin().disable();
 
         http.logout()
+                .logoutSuccessHandler(logoutSuccessHandler)
                 .logoutSuccessUrl("/");
 
         // 세션 생성 x, 기존 세션 사용 x (jwt 사용시)
