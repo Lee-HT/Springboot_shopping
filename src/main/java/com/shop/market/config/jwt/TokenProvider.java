@@ -79,7 +79,7 @@ public class TokenProvider {
     }
 
     //ACCESS TOKEN 발급
-    public String AccessToken(String username) {
+    public String getAccessToken(String username) {
         // ACCESS TOKEN 만료 시간
         Date expire = expireTime(ACCESS_TOKEN_EXPIRE_LENGTH);
 
@@ -91,7 +91,7 @@ public class TokenProvider {
     }
 
     //REFRESH TOKEN 발급
-    public String ReFreshToken(String username) {
+    public String getReFreshToken(String username) {
         Date expire = expireTime(REFRESH_TOKEN_EXPIRE_LENGTH);
 
         String JwtToken = jwtToken(expire,username);

@@ -39,8 +39,8 @@ public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         log.info(httpSession.getAttribute("user").toString());
 
         String username = sessionUser.getUsername();
-        String accessToken = tokenProvider.AccessToken(username);
-        String refreshToken = tokenProvider.ReFreshToken(username);
+        String accessToken = tokenProvider.getAccessToken(username);
+        String refreshToken = tokenProvider.getReFreshToken(username);
 
         response.setHeader("Authorization", accessToken);
 

@@ -14,7 +14,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @RequiredArgsConstructor
@@ -42,10 +41,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     log.info("권한 인증");
                 } else if (tokenProvider.validationToken(refreshToken)) {
                     String username = tokenProvider.getUsername(refreshToken);
+                    String newAccessToken = tokenProvider.getAccessToken(username);
 
                     // ms -> sec
                     Long ACCESS_TIME = JwtProperties.accessTime / 1000;
-                    Cookie cookie = cookieProvider.getCookie("accessToken", accessToken,
+                    Cookie cookie = cookieProvider.getCookie("accessToken", newAccessToken,
                             ACCESS_TIME.intValue());
                     response.addCookie(cookie);
                     log.info("Token refresh");
