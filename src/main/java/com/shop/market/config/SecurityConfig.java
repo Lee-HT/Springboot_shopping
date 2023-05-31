@@ -26,6 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 @Slf4j
 public class SecurityConfig {
+
     private final OAuth2Service oAuth2Service;
     private final Oauth2SuccessHandler oauth2SuccessHandler;
     private final LogoutSuccessHandler logoutSuccessHandler;
@@ -41,9 +42,8 @@ public class SecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring() // 시큐리티 적용 무시
                 .requestMatchers(
-                        PathRequest.toStaticResources().atCommonLocations()) //정적 리소스
-                .requestMatchers("/jwt/**")
-                .requestMatchers("/","/login/**");
+                        PathRequest.toStaticResources().atCommonLocations()
+                ); //정적 리소스
     }
 
     @Bean
@@ -61,16 +61,19 @@ public class SecurityConfig {
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        http.addFilterBefore(new JwtAuthenticationFilter(tokenProvider,cookieProvider),
+        http.addFilterBefore(new JwtAuthenticationFilter(tokenProvider, cookieProvider),
                 UsernamePasswordAuthenticationFilter.class);
 
 //        http.apply(new MycustomDsl(tokenProvider));
 
         http.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/", "/login/**").permitAll()
+                .requestMatchers("/jwt/**").permitAll()
                 .requestMatchers("/itemV/**", "/postV/**", "/jpa/**", "/home/**")
                 .hasRole("USER")
                 .requestMatchers("/item/**")
-                .hasAnyRole("ADMIN","MANAGER")
+                .hasAnyRole("ADMIN", "MANAGER")
+
                 .anyRequest().authenticated()
         );
 
@@ -84,14 +87,17 @@ public class SecurityConfig {
     }
 
     public class MycustomDsl extends AbstractHttpConfigurer<MycustomDsl, HttpSecurity> {
+
         private TokenProvider tokenProvider;
-        public MycustomDsl(TokenProvider tokenProvider){
+
+        public MycustomDsl(TokenProvider tokenProvider) {
             this.tokenProvider = tokenProvider;
         }
 
         @Override
-        public void configure(HttpSecurity http) throws Exception{
-            http.addFilterBefore(new JwtAuthenticationFilter(tokenProvider,cookieProvider),UsernamePasswordAuthenticationFilter.class);
+        public void configure(HttpSecurity http) throws Exception {
+            http.addFilterBefore(new JwtAuthenticationFilter(tokenProvider, cookieProvider),
+                    UsernamePasswordAuthenticationFilter.class);
         }
     }
 }

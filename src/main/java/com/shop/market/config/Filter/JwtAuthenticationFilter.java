@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @RequiredArgsConstructor
-@Component
 @Slf4j
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
