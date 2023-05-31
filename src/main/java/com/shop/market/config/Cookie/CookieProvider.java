@@ -1,4 +1,4 @@
-package com.shop.market.config.Oauth;
+package com.shop.market.config.Cookie;
 
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.Cookie;

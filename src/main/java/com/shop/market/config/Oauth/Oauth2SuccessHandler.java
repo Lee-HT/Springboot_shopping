@@ -1,5 +1,6 @@
 package com.shop.market.config.Oauth;
 
+import com.shop.market.config.Cookie.CookieProvider;
 import com.shop.market.config.jwt.JwtProperties;
 import com.shop.market.config.jwt.TokenProvider;
 import com.shop.market.dto.SessionUser;
@@ -14,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
-import org.springframework.web.util.UriComponentsBuilder;
 
 @Slf4j
 @Component
@@ -52,11 +52,15 @@ public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
                 REFRESH_TOKEN_EXPIRE_LENGTH.intValue());
         response.addCookie(refreshCookie);
 
-        String targetUrl = UriComponentsBuilder.fromUriString("/")
-//                .queryParam("", "")
-                .build().toUriString();
+        log.info("Oauth2Success");
 
-        response.sendRedirect(targetUrl);
+        super.onAuthenticationSuccess(request,response,authentication);
+
+//        String targetUrl = UriComponentsBuilder.fromUriString("/")
+//                .queryParam("", "")
+//                .build().toUriString();
+//
+//        response.sendRedirect(targetUrl);
 //        getRedirectStrategy().sendRedirect(request, response, targetUrl);
 
     }

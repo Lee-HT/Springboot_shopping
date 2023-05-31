@@ -143,15 +143,20 @@ public class TokenProvider {
     public HashMap<String, String> resolveToken(HttpServletRequest request) {
         Cookie[] tokens = request.getCookies();
         HashMap<String, String> Tokens = new HashMap<>();
-        for (Cookie cookie : tokens) {
-            String name = cookie.getName();
-            if (name.equals("accessToken")) {
-                Tokens.put("accessToken", cookie.getValue());
-            } else if (name.equals("refreshToken")) {
-                Tokens.put("refreshToken", cookie.getValue());
+        try {
+            for (Cookie cookie : tokens) {
+                String name = cookie.getName();
+                if (name.equals("accessToken")) {
+                    Tokens.put("accessToken", cookie.getValue());
+                } else if (name.equals("refreshToken")) {
+                    Tokens.put("refreshToken", cookie.getValue());
+                }
             }
+            return Tokens;
+        } catch(Exception e) {
+            log.info("resolve error");
         }
-        return Tokens;
+        return null;
     }
 
     // HEADER 에서 TOKEN 가져옴

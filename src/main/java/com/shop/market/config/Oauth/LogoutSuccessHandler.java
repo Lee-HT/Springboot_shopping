@@ -1,5 +1,6 @@
 package com.shop.market.config.Oauth;
 
+import com.shop.market.config.Cookie.CookieProvider;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;

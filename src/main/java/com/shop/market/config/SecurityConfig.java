@@ -1,7 +1,7 @@
 package com.shop.market.config;
 
 import com.shop.market.config.Filter.JwtAuthenticationFilter;
-import com.shop.market.config.Oauth.CookieProvider;
+import com.shop.market.config.Cookie.CookieProvider;
 import com.shop.market.config.Oauth.LogoutSuccessHandler;
 import com.shop.market.config.Oauth.OAuth2Service;
 import com.shop.market.config.Oauth.Oauth2SuccessHandler;
@@ -39,9 +39,11 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring()
+        return (web) -> web.ignoring() // 시큐리티 적용 무시
                 .requestMatchers(
-                        PathRequest.toStaticResources().atCommonLocations()); //정적 리소스 시큐리티 적용 무시
+                        PathRequest.toStaticResources().atCommonLocations()) //정적 리소스
+                .requestMatchers("/jwt/**")
+                .requestMatchers("/","/login/**");
     }
 
     @Bean
@@ -65,13 +67,10 @@ public class SecurityConfig {
 //        http.apply(new MycustomDsl(tokenProvider));
 
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers("/","/login/**")
-                .permitAll()
                 .requestMatchers("/itemV/**", "/postV/**", "/jpa/**", "/home/**")
                 .hasRole("USER")
                 .requestMatchers("/item/**")
                 .hasAnyRole("ADMIN","MANAGER")
-                .requestMatchers("/jwt/**").permitAll()
                 .anyRequest().authenticated()
         );
 
