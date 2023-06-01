@@ -33,7 +33,7 @@ public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     }
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
             Authentication authentication) throws IOException, ServletException {
         SessionUser sessionUser = (SessionUser) httpSession.getAttribute("user");
         log.info(httpSession.getAttribute("user").toString());

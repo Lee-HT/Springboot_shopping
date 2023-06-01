@@ -3,6 +3,7 @@
 <div class="col-md-12">
   <div class="col-md-6">
     <form action="/post" method="post">
+      <input type="hidden" name="${_csrf}" value="${CSRF_TOKEN}">
       <div class="form-group">
         <label>판매자</label>
         <input type="text" class="form-control" name="seller" placeholder="판매자를 입력하세요">
