@@ -60,7 +60,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 //        http.cors().disable();
-//        http.csrf().disable();
+        http.csrf().disable();
         http.httpBasic().disable();
         http.formLogin().disable();
 
@@ -96,6 +96,7 @@ public class SecurityConfig {
                 .userService(oAuth2Service);
 
         // CSRF
+        /*
         CookieCsrfTokenRepository tokenRepository = CookieCsrfTokenRepository.withHttpOnlyFalse();
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
         requestHandler.setCsrfRequestAttributeName("_csrf");
@@ -105,6 +106,7 @@ public class SecurityConfig {
                 .csrfTokenRequestHandler(requestHandler)
         );
         http.addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class);
+         */
 
         return http.build();
     }

@@ -22,8 +22,7 @@ public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     private final HttpSession httpSession;
     private final TokenProvider tokenProvider;
     private final CookieProvider cookieProvider;
-    private final Long ACCESS_TOKEN_EXPIRE_LENGTH = JwtProperties.accessTime / 1000;
-    private final Long REFRESH_TOKEN_EXPIRE_LENGTH = JwtProperties.refreshTime / 1000;
+    private final Long REFRESH_TOKEN_EXPIRE = JwtProperties.refreshTime / 1000;
 
     @Autowired
     private Oauth2SuccessHandler(HttpSession httpSession,TokenProvider tokenProvider,CookieProvider cookieProvider){
@@ -45,11 +44,11 @@ public class Oauth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         response.setHeader("Authorization", accessToken);
 
         Cookie accessCookie = cookieProvider.getCookie("accessToken",accessToken,
-                ACCESS_TOKEN_EXPIRE_LENGTH.intValue());
+                -1);
         response.addCookie(accessCookie);
 
         Cookie refreshCookie = cookieProvider.getCookie("refreshToken",refreshToken,
-                REFRESH_TOKEN_EXPIRE_LENGTH.intValue());
+                REFRESH_TOKEN_EXPIRE.intValue());
         response.addCookie(refreshCookie);
 
         log.info("Oauth2Success");

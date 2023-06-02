@@ -38,7 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                             accessToken);
                     SecurityContextHolder.getContext().setAuthentication(authentication);
 
-                    log.info("권한 인증");
+                    log.info("access token available");
                 } else if (tokenProvider.validationToken(refreshToken)) {
                     String username = tokenProvider.getUsername(refreshToken);
                     String newAccessToken = tokenProvider.getAccessToken(username);

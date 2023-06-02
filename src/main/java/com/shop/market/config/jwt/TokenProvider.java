@@ -31,7 +31,7 @@ public class TokenProvider {
     private final Key key;
 
     public TokenProvider() {
-        this.key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+        this.key = JwtProperties.secretKey;
         this.tokenType = "Bearer ";
         this.ACCESS_TOKEN_EXPIRE_LENGTH = JwtProperties.accessTime;
         this.REFRESH_TOKEN_EXPIRE_LENGTH = JwtProperties.refreshTime;
