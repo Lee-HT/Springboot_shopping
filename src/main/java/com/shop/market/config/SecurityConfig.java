@@ -1,17 +1,11 @@
 package com.shop.market.config;
 
-import com.shop.market.config.Filter.CsrfCookieFilter;
 import com.shop.market.config.Filter.JwtAuthenticationFilter;
 import com.shop.market.config.Cookie.CookieProvider;
 import com.shop.market.config.Oauth.LogoutSuccessHandler;
 import com.shop.market.config.Oauth.OAuth2Service;
 import com.shop.market.config.Oauth.Oauth2SuccessHandler;
 import com.shop.market.config.jwt.TokenProvider;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -26,11 +20,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
-import org.springframework.security.web.csrf.CsrfToken;
-import org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler;
-import org.springframework.web.filter.OncePerRequestFilter;
 
 @Configuration
 @EnableWebSecurity
