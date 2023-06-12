@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 
 // security 자동 설정 off  and  bean 탐색
 @SpringBootApplication(
-        exclude = SecurityAutoConfiguration.class
+//        exclude = SecurityAutoConfiguration.class
 )
 public class MarketApplication {
 
